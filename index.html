@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Shebin S Illikkal | Data Scientist & Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+:root{
+  --neon1:#ff006e;--neon2:#8338ec;--neon3:#3a86ff;--neon4:#06d6a0;--neon5:#ffbe0b;--neon6:#fb5607;
+  --dark:#0d0025;--dark2:#140040;--dark3:#1a0050;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;background:var(--dark);color:#fff;overflow-x:hidden;cursor:none}
+
+/* LIVE COLORFUL BACKGROUND */
+body::before{
+  content:'';position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;
+  background:linear-gradient(125deg,#0d0025,#1a0050,#001a40,#002a1a,#1a0035,#0d0025);
+  background-size:400% 400%;
+  animation:bgShift 12s ease infinite;
+}
+@keyframes bgShift{
+  0%{background-position:0% 50%}
+  25%{background-position:100% 0%}
+  50%{background-position:100% 100%}
+  75%{background-position:0% 100%}
+  100%{background-position:0% 50%}
+}
+
+/* CUSTOM CURSOR */
+.cursor{position:fixed;width:12px;height:12px;background:var(--neon1);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;mix-blend-mode:difference}
+.cursor-trail{position:fixed;width:35px;height:35px;border:2px solid rgba(131,56,236,.6);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:left .12s ease,top .12s ease,width .3s,height .3s}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--dark)}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--neon1),var(--neon2),var(--neon3));border-radius:3px}
+
+/* CANVAS */
+#bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+
+/* AURORA */
+.aurora{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:hidden}
+.aurora-layer{position:absolute;border-radius:50%;filter:blur(90px);animation:auroraPulse 8s ease-in-out infinite}
+.a1{width:85vw;height:65vh;background:radial-gradient(ellipse,rgba(131,56,236,.55),transparent);top:-20%;left:-20%;animation-delay:0s}
+.a2{width:75vw;height:55vh;background:radial-gradient(ellipse,rgba(58,134,255,.5),transparent);top:20%;right:-20%;animation-delay:2.5s}
+.a3{width:65vw;height:65vh;background:radial-gradient(ellipse,rgba(255,0,110,.45),transparent);bottom:-20%;left:30%;animation-delay:5s}
+.a4{width:55vw;height:45vh;background:radial-gradient(ellipse,rgba(6,214,160,.4),transparent);bottom:10%;left:-10%;animation-delay:1.5s}
+.a5{width:50vw;height:50vh;background:radial-gradient(ellipse,rgba(255,190,11,.35),transparent);top:40%;left:40%;animation-delay:3.5s}
+.a6{width:45vw;height:40vh;background:radial-gradient(ellipse,rgba(251,86,7,.4),transparent);top:10%;left:50%;animation-delay:6.5s}
+@keyframes auroraPulse{0%,100%{transform:scale(1) rotate(0deg);opacity:.7}50%{transform:scale(1.25) rotate(8deg);opacity:1}}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:1000;padding:18px 70px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(30px);background:rgba(13,0,37,.6);border-bottom:1px solid rgba(131,56,236,.3);box-shadow:0 4px 30px rgba(131,56,236,.1)}
+.nav-logo{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700;position:relative}
+.nav-logo-text{background:linear-gradient(135deg,var(--neon1),var(--neon2),var(--neon3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200%;animation:logoShift 3s ease infinite}
+@keyframes logoShift{0%{background-position:0%}50%{background-position:100%}100%{background-position:0%}}
+.nav-logo-dot{display:inline-block;width:8px;height:8px;background:var(--neon4);border-radius:50%;margin-left:4px;animation:dotPulse 1.5s ease infinite;vertical-align:middle}
+@keyframes dotPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(6,214,160,.4)}50%{transform:scale(1.3);box-shadow:0 0 0 8px rgba(6,214,160,0)}}
+.nav-links{display:flex;gap:8px;list-style:none}
+.nav-links a{text-decoration:none;color:#aaa;font-weight:500;font-size:.88rem;padding:8px 18px;border-radius:50px;transition:.3s;position:relative;border:1px solid transparent}
+.nav-links a:hover{color:#fff;background:rgba(131,56,236,.2);border-color:rgba(131,56,236,.4)}
+.nav-cta{background:linear-gradient(135deg,var(--neon1),var(--neon2)) !important;color:#fff !important;border-color:transparent !important}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;z-index:1;padding:120px 20px 80px;overflow:hidden}
+.hero-inner{position:relative;z-index:2;max-width:900px}
+
+/* GLITCH AVATAR */
+.avatar-container{position:relative;display:inline-block;margin-bottom:30px}
+.avatar-hex{width:180px;height:180px;position:relative;margin:0 auto}
+.avatar-hex svg{position:absolute;top:0;left:0;width:100%;height:100%;animation:hexSpin 20s linear infinite}
+@keyframes hexSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.avatar-hex-inner{position:absolute;inset:12px;background:linear-gradient(135deg,var(--dark2),var(--dark3));clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);display:flex;align-items:center;justify-content:center;font-size:4.5rem;z-index:2}
+.avatar-pulse{position:absolute;inset:-20px;border-radius:50%;background:conic-gradient(var(--neon1),var(--neon2),var(--neon3),var(--neon4),var(--neon1));animation:pulseSpin 4s linear infinite;opacity:.3;filter:blur(15px)}
+@keyframes pulseSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.online-badge{position:absolute;bottom:15px;right:15px;background:rgba(6,214,160,.15);border:1px solid var(--neon4);border-radius:50px;padding:5px 12px;font-size:.7rem;color:var(--neon4);display:flex;align-items:center;gap:5px;z-index:3}
+.online-dot{width:7px;height:7px;background:var(--neon4);border-radius:50%;animation:dotPulse 1.5s ease infinite}
+
+/* GLITCH NAME */
+.glitch-wrap{position:relative;display:inline-block;margin-bottom:5px}
+.hero-name{font-family:'Space Grotesk',sans-serif;font-size:4rem;font-weight:700;background:linear-gradient(135deg,#fff,#e2d9f3,var(--neon3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1;position:relative}
+.hero-name::before,.hero-name::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#fff,#e2d9f3,var(--neon3));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-name::before{animation:glitch1 4s infinite;clip-path:polygon(0 0,100% 0,100% 35%,0 35%);transform:translate(-3px)}
+.hero-name::after{animation:glitch2 4s infinite;clip-path:polygon(0 65%,100% 65%,100% 100%,0 100%);transform:translate(3px)}
+@keyframes glitch1{0%,90%,100%{transform:translate(0);opacity:0}92%{transform:translate(-4px,1px);opacity:.8;filter:hue-rotate(90deg)}94%{transform:translate(3px,-1px);opacity:.8}96%{transform:translate(-2px,2px);opacity:.8}}
+@keyframes glitch2{0%,90%,100%{transform:translate(0);opacity:0}93%{transform:translate(4px,-1px);opacity:.8;filter:hue-rotate(-90deg)}95%{transform:translate(-3px,1px);opacity:.8}97%{transform:translate(2px,-2px);opacity:.8}}
+
+.hero-subtitle{font-size:1rem;color:#7c6f9a;margin-bottom:20px;letter-spacing:3px;text-transform:uppercase;font-weight:500}
+.typed-line{font-size:1.5rem;margin-bottom:10px;height:45px;display:flex;align-items:center;justify-content:center;gap:10px}
+.typed-label{color:#64748b}
+.typed-el{font-weight:700;background:linear-gradient(135deg,var(--neon1),var(--neon2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;border-right:3px solid var(--neon1);padding-right:5px;animation:tblink .8s step-end infinite}
+@keyframes tblink{50%{border-color:transparent}}
+
+.hero-desc{font-size:1.05rem;color:#94a3b8;max-width:650px;margin:15px auto 35px;line-height:1.85}
+
+/* CONTACT BADGES */
+.hero-contact-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:35px}
+.contact-badge{display:flex;align-items:center;gap:8px;padding:10px 20px;border-radius:50px;font-size:.85rem;font-weight:600;text-decoration:none;transition:.3s;border:1px solid}
+.cb-phone{background:rgba(6,214,160,.1);border-color:rgba(6,214,160,.4);color:var(--neon4)}
+.cb-freelance{background:rgba(255,190,11,.1);border-color:rgba(255,190,11,.4);color:var(--neon5)}
+.contact-badge:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 8px 25px rgba(131,56,236,.25)}
+
+.hero-btns{display:flex;gap:15px;justify-content:center;flex-wrap:wrap;margin-bottom:60px}
+.btn-neon{padding:15px 40px;border-radius:50px;font-size:1rem;font-weight:700;text-decoration:none;transition:.3s;font-family:inherit;border:none;cursor:none;position:relative;overflow:hidden}
+.btn-neon::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.2),transparent);opacity:0;transition:.3s}
+.btn-neon:hover::before{opacity:1}
+.btn-neon:hover{transform:translateY(-4px)}
+.bn1{background:linear-gradient(135deg,var(--neon1),var(--neon2));color:#fff;box-shadow:0 0 40px rgba(255,0,110,.3)}
+.bn1:hover{box-shadow:0 0 60px rgba(255,0,110,.5)}
+.bn2{background:transparent;border:2px solid var(--neon3)!important;color:var(--neon3)}
+.bn2:hover{background:var(--neon3);color:#020010;border-color:var(--neon3)!important}
+
+/* STATS */
+.hero-stats{display:flex;gap:0;justify-content:center;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:20px;overflow:hidden;max-width:600px;margin:0 auto}
+.stat-item{flex:1;padding:22px 15px;text-align:center;border-right:1px solid rgba(255,255,255,.06);position:relative}
+.stat-item:last-child{border-right:none}
+.stat-num{font-size:2rem;font-weight:800;line-height:1}
+.s1{background:linear-gradient(135deg,var(--neon1),var(--neon2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.s2{background:linear-gradient(135deg,var(--neon2),var(--neon3));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.s3{background:linear-gradient(135deg,var(--neon3),var(--neon4));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.s4{background:linear-gradient(135deg,var(--neon4),var(--neon5));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat-label{font-size:.72rem;color:#475569;margin-top:5px;text-transform:uppercase;letter-spacing:1px}
+
+/* SCROLL */
+.scroll-indicator{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;animation:fadeInUp 1s ease 2s both}
+.scroll-line{width:1px;height:60px;background:linear-gradient(transparent,var(--neon2));animation:scrollLine 2s ease infinite}
+@keyframes scrollLine{0%{height:0;opacity:1}100%{height:60px;opacity:0}}
+.scroll-text{font-size:.65rem;color:#475569;letter-spacing:3px;text-transform:uppercase}
+
+/* SECTIONS */
+.section{padding:110px 70px;position:relative;z-index:1}
+.section-glass{background:rgba(255,255,255,.02);backdrop-filter:blur(2px)}
+.section-header{text-align:center;margin-bottom:80px}
+.section-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 22px;background:rgba(131,56,236,.1);border:1px solid rgba(131,56,236,.3);border-radius:50px;font-size:.75rem;color:#a78bfa;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px}
+.section-eyebrow i{font-size:.7rem}
+.section-header h2{font-family:'Space Grotesk',sans-serif;font-size:3rem;font-weight:700;margin-bottom:10px}
+.section-header h2 .highlight{position:relative;display:inline-block}
+.section-header h2 .highlight::after{content:'';position:absolute;bottom:-4px;left:0;width:100%;height:3px;background:linear-gradient(135deg,var(--neon1),var(--neon3));border-radius:2px}
+.section-header p{color:#64748b;font-size:1.05rem}
+
+/* ABOUT */
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.about-card{background:rgba(131,56,236,.06);border:1px solid rgba(131,56,236,.2);border-radius:24px;padding:38px;position:relative;overflow:hidden;backdrop-filter:blur(10px)}
+.about-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--neon1),var(--neon2),var(--neon3),var(--neon4))}
+.about-card p{color:#94a3b8;line-height:2;font-size:.97rem;margin-bottom:14px}
+.hl{color:#e2d9f3;font-weight:600}
+.hl-pink{background:linear-gradient(135deg,var(--neon1),var(--neon2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700}
+.hl-cyan{background:linear-gradient(135deg,var(--neon3),var(--neon4));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:25px}
+.info-item{display:flex;align-items:center;gap:10px;padding:12px 15px;background:rgba(131,56,236,.1);border:1px solid rgba(131,56,236,.25);border-radius:12px;font-size:.85rem;color:#cbd5e1;transition:.3s}
+.info-item:hover{border-color:rgba(131,56,236,.4);background:rgba(131,56,236,.1)}
+.info-item i{color:var(--neon3);width:16px;font-size:.9rem}
+.about-right{display:flex;flex-direction:column;gap:20px}
+.neon-bubble-grid{display:flex;flex-wrap:wrap;gap:10px}
+.nbub{padding:10px 20px;border-radius:50px;font-size:.82rem;font-weight:600;transition:.4s;cursor:default;position:relative;overflow:hidden}
+.nbub::before{content:'';position:absolute;inset:0;opacity:0;transition:.3s;border-radius:50px}
+.nbub:hover::before{opacity:1}
+.nbub:hover{transform:translateY(-4px) scale(1.05);box-shadow:0 8px 25px rgba(0,0,0,.3)}
+.nb1{background:rgba(255,0,110,.1);border:1px solid rgba(255,0,110,.4);color:#ff6b9d}
+.nb1::before{background:rgba(255,0,110,.1)}
+.nb2{background:rgba(131,56,236,.1);border:1px solid rgba(131,56,236,.4);color:#b06ef3}
+.nb3{background:rgba(58,134,255,.1);border:1px solid rgba(58,134,255,.4);color:#74aeff}
+.nb4{background:rgba(6,214,160,.1);border:1px solid rgba(6,214,160,.4);color:#4fffd4}
+.nb5{background:rgba(255,190,11,.1);border:1px solid rgba(255,190,11,.4);color:#ffd04f}
+.nb6{background:rgba(251,86,7,.1);border:1px solid rgba(251,86,7,.4);color:#ff8c47}
+.claude-card{background:linear-gradient(135deg,rgba(255,0,110,.15),rgba(131,56,236,.15),rgba(58,134,255,.12));border:1px solid rgba(131,56,236,.5);border-radius:18px;padding:25px;position:relative;overflow:hidden;box-shadow:0 0 30px rgba(131,56,236,.1)}
+.claude-card::before{content:'';position:absolute;top:-50%;right:-50%;width:200%;height:200%;background:conic-gradient(transparent 0deg,rgba(131,56,236,.05) 60deg,transparent 120deg);animation:rotateBg 8s linear infinite}
+@keyframes rotateBg{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.claude-card-inner{position:relative;z-index:1}
+.claude-card h4{font-size:1rem;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.claude-card h4 span{background:linear-gradient(135deg,var(--neon1),var(--neon2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700}
+.claude-card p{font-size:.88rem;color:#94a3b8;line-height:1.8}
+
+/* SKILLS */
+.skills-bg{background:linear-gradient(180deg,transparent,rgba(131,56,236,.03),transparent)}
+.skills-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:22px}
+.sk-group{background:rgba(20,0,64,.4);border:1px solid rgba(131,56,236,.2);border-radius:22px;padding:32px;transition:.4s;position:relative;overflow:hidden;backdrop-filter:blur(12px)}
+.sk-group::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gk)}
+.sk-group:hover{transform:translateY(-6px);box-shadow:0 25px 70px rgba(131,56,236,.1)}
+.sk-head{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+.sk-ico{width:50px;height:50px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:var(--gk);opacity:.9}
+.sk-head h3{font-size:1.05rem;font-weight:700;color:#e2e8f0}
+.sk-item{margin-bottom:18px}
+.sk-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.sk-name{font-size:.88rem;color:#cbd5e1;font-weight:500}
+.sk-pct{font-size:.82rem;font-weight:700;background:var(--gk);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sk-bar{background:rgba(255,255,255,.06);border-radius:50px;height:7px;overflow:hidden;position:relative}
+.sk-fill{height:100%;border-radius:50px;width:0;transition:width 1.8s cubic-bezier(.25,.46,.45,.94);background:var(--gk);position:relative}
+.sk-fill::after{content:'';position:absolute;top:0;right:0;width:12px;height:100%;background:rgba(255,255,255,.5);border-radius:50px;filter:blur(4px)}
+
+/* SERVICES */
+.srv-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.srv-card{background:rgba(20,0,64,.35);border:1px solid rgba(131,56,236,.18);border-radius:24px;padding:35px;transition:.4s;position:relative;overflow:hidden;cursor:default;backdrop-filter:blur(12px)}
+.srv-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--sc)}
+.srv-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(131,56,236,.06),transparent 70%);opacity:0;transition:.4s}
+.srv-card:hover::after{opacity:1}
+.srv-card:hover{transform:translateY(-10px);border-color:rgba(131,56,236,.25);box-shadow:0 30px 80px rgba(131,56,236,.12)}
+.srv-ico{width:70px;height:70px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:22px;background:var(--sc);position:relative;z-index:1}
+.srv-card h3{font-size:1.2rem;font-weight:700;margin-bottom:12px;position:relative;z-index:1}
+.srv-card p{color:#64748b;font-size:.9rem;line-height:1.75;position:relative;z-index:1}
+.srv-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px;position:relative;z-index:1}
+.srv-tag{padding:5px 13px;border-radius:50px;font-size:.72rem;font-weight:600;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:#94a3b8;transition:.3s}
+.srv-tag:hover{border-color:rgba(131,56,236,.4);color:#a78bfa;background:rgba(131,56,236,.1)}
+
+/* PROJECTS */
+.proj-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:22px}
+.proj-card{background:rgba(20,0,64,.35);border:1px solid rgba(131,56,236,.18);border-radius:24px;overflow:hidden;transition:.4s;position:relative;backdrop-filter:blur(12px)}
+.proj-card:hover{transform:translateY(-10px) scale(1.01);border-color:rgba(131,56,236,.3);box-shadow:0 30px 80px rgba(131,56,236,.15)}
+.proj-img{height:200px;display:flex;align-items:center;justify-content:center;font-size:4.5rem;position:relative;overflow:hidden}
+.proj-img::before{content:'';position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(2,0,16,.9))}
+.proj-badge{position:absolute;top:15px;right:15px;background:rgba(6,214,160,.15);border:1px solid var(--neon4);border-radius:50px;padding:4px 12px;font-size:.7rem;color:var(--neon4);font-weight:600;z-index:2}
+.proj-body{padding:25px}
+.proj-body h3{font-size:1.1rem;font-weight:700;margin-bottom:10px;color:#e2e8f0}
+.proj-body p{font-size:.87rem;color:#64748b;line-height:1.7;margin-bottom:15px}
+.proj-tech{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+.pt{padding:4px 12px;border-radius:50px;font-size:.72rem;font-weight:600;background:rgba(131,56,236,.12);border:1px solid rgba(131,56,236,.25);color:#a78bfa}
+.proj-links{display:flex;gap:10px}
+.pln{padding:9px 20px;border-radius:50px;font-size:.82rem;font-weight:600;text-decoration:none;transition:.3s;cursor:none}
+.pln1{background:linear-gradient(135deg,var(--neon1),var(--neon2));color:#fff}
+.pln2{border:1px solid rgba(255,255,255,.15);color:#94a3b8}
+.pln:hover{transform:translateY(-2px)}
+
+/* TOOLS */
+.tools-wrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
+.tool{background:rgba(14,0,45,.45);border:1px solid rgba(131,56,236,.22);border-radius:22px;padding:0;transition:.45s;cursor:default;position:relative;overflow:hidden;backdrop-filter:blur(14px);display:flex;flex-direction:column}
+.tool-top{padding:22px 22px 16px;display:flex;align-items:center;gap:15px;border-bottom:1px solid rgba(131,56,236,.12)}
+.tool-top-icon{width:54px;height:54px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.9rem;flex-shrink:0;background:var(--ti);position:relative;transition:.4s}
+.tool-top-icon::after{content:'';position:absolute;inset:0;border-radius:16px;background:rgba(255,255,255,.06);opacity:0;transition:.3s}
+.tool:hover .tool-top-icon::after{opacity:1}
+.tool-top-text{}
+.tool-name{font-size:.98rem;font-weight:700;color:#e2d9f3;margin-bottom:3px}
+.tool-category{font-size:.7rem;font-weight:600;color:#64748b;letter-spacing:.8px;text-transform:uppercase}
+.tool-body{padding:18px 22px 20px;flex:1;display:flex;flex-direction:column;gap:12px}
+.tool-proj-title{font-size:.92rem;font-weight:700;color:#c4b5fd;display:flex;align-items:center;gap:7px}
+.tool-proj-title span{font-size:.95rem}
+.tool-proj-desc{font-size:.82rem;color:#7a8a9e;line-height:1.7;flex:1}
+.tool-features{display:flex;flex-direction:column;gap:5px;margin-top:2px}
+.tool-feat{font-size:.75rem;color:#64748b;display:flex;align-items:flex-start;gap:7px;line-height:1.5}
+.tool-feat::before{content:'▸';color:var(--tf,#8338ec);flex-shrink:0;font-size:.8rem;margin-top:1px}
+.tool-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.tool-tag{padding:3px 11px;border-radius:50px;font-size:.68rem;font-weight:600;background:rgba(131,56,236,.1);border:1px solid rgba(131,56,236,.22);color:#a78bfa}
+.tool-footer{padding:12px 22px 16px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(131,56,236,.1)}
+.tool-status{display:flex;align-items:center;gap:6px;font-size:.72rem;font-weight:600;color:#06d6a0}
+.tool-status-dot{width:7px;height:7px;border-radius:50%;background:#06d6a0;animation:statusPulse 2s ease infinite}
+@keyframes statusPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
+.tool-status.wip{color:#ffbe0b}.tool-status.wip .tool-status-dot{background:#ffbe0b}
+.tool-year{font-size:.7rem;color:#334155;font-weight:600}
+.tool::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,var(--tg,rgba(131,56,236,.08)),transparent 60%);opacity:0;transition:.5s;pointer-events:none}
+.tool:hover::before{opacity:1}
+.tool:hover{transform:translateY(-8px);border-color:rgba(131,56,236,.4);box-shadow:0 24px 60px rgba(131,56,236,.16)}
+
+/* CONTACT */
+.contact-wrap{display:grid;grid-template-columns:1fr 1.5fr;gap:50px;align-items:start}
+.contact-left h3{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;margin-bottom:15px}
+.contact-left p{color:#64748b;line-height:1.9;margin-bottom:30px}
+.c-cards{display:flex;flex-direction:column;gap:14px}
+.c-card{display:flex;align-items:center;gap:16px;padding:18px 22px;background:rgba(20,0,64,.4);border:1px solid rgba(131,56,236,.2);border-radius:16px;text-decoration:none;color:inherit;transition:.4s;position:relative;overflow:hidden;backdrop-filter:blur(10px)}
+.c-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--cc);border-radius:0 2px 2px 0;transform:scaleY(0);transition:.3s}
+.c-card:hover{border-color:rgba(131,56,236,.3);transform:translateX(8px);box-shadow:5px 0 30px rgba(131,56,236,.08)}
+.c-card:hover::before{transform:scaleY(1)}
+.c-ico{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;background:var(--cc)}
+.c-text small{font-size:.72rem;color:#475569;display:block;text-transform:uppercase;letter-spacing:1px}
+.c-text span{font-size:.95rem;font-weight:600;color:#e2e8f0}
+.c-form{background:rgba(20,0,64,.4);border:1px solid rgba(131,56,236,.2);border-radius:26px;padding:42px;position:relative;overflow:hidden;backdrop-filter:blur(15px)}
+.c-form::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--neon1),var(--neon2),var(--neon3),var(--neon4),var(--neon5))}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.f-grp{margin-bottom:20px}
+.f-grp label{display:block;font-size:.82rem;color:#94a3b8;margin-bottom:8px;font-weight:500;text-transform:uppercase;letter-spacing:.5px}
+.f-grp input,.f-grp textarea,.f-grp select{width:100%;padding:14px 18px;background:rgba(131,56,236,.08);border:1px solid rgba(131,56,236,.2);border-radius:13px;color:#fff;font-size:.93rem;font-family:inherit;outline:none;transition:.3s;cursor:none}
+.f-grp input:focus,.f-grp textarea:focus,.f-grp select:focus{border-color:var(--neon2);box-shadow:0 0 0 3px rgba(131,56,236,.12);background:rgba(131,56,236,.05)}
+.f-grp textarea{height:120px;resize:vertical}
+.f-grp select option{background:var(--dark2);color:#fff}
+.submit-btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--neon1),var(--neon2),var(--neon3));border:none;border-radius:14px;color:#fff;font-size:1rem;font-weight:700;cursor:none;transition:.3s;font-family:inherit;letter-spacing:.5px;position:relative;overflow:hidden}
+.submit-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,255,255,.2),transparent);transform:translateX(-100%);transition:.5s}
+.submit-btn:hover::before{transform:translateX(100%)}
+.submit-btn:hover{transform:translateY(-3px);box-shadow:0 15px 50px rgba(131,56,236,.4)}
+
+/* FOOTER */
+footer{background:rgba(13,0,37,.7);border-top:1px solid rgba(131,56,236,.2);padding:60px 70px 35px;position:relative;z-index:1;backdrop-filter:blur(20px)}
+footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--neon2),var(--neon1),var(--neon3),transparent)}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:50px;margin-bottom:50px}
+.footer-brand .logo{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;background:linear-gradient(135deg,var(--neon1),var(--neon2),var(--neon3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block;margin-bottom:5px}
+.footer-brand .sub{font-size:.8rem;color:var(--neon4);margin-bottom:15px;letter-spacing:1px}
+.footer-brand p{color:#475569;font-size:.88rem;line-height:1.8;max-width:280px}
+.footer-contact-strip{margin-top:20px;display:flex;flex-direction:column;gap:8px}
+.fc-strip{display:flex;align-items:center;gap:8px;font-size:.85rem;color:#94a3b8}
+.fc-strip i{color:var(--neon3);width:16px}
+.footer-nav h5{font-size:.9rem;font-weight:700;color:#e2e8f0;margin-bottom:18px;text-transform:uppercase;letter-spacing:1px}
+.footer-nav ul{list-style:none}
+.footer-nav li{margin-bottom:10px}
+.footer-nav a{text-decoration:none;color:#475569;font-size:.87rem;transition:.3s;display:flex;align-items:center;gap:6px}
+.footer-nav a::before{content:'→';opacity:0;transform:translateX(-5px);transition:.3s;color:var(--neon1)}
+.footer-nav a:hover{color:#a78bfa;padding-left:10px}
+.footer-nav a:hover::before{opacity:1;transform:translateX(0)}
+.footer-socials{display:flex;gap:10px;margin-top:20px}
+.soc{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1rem;transition:.4s;border:1px solid rgba(255,255,255,.08);color:#64748b;position:relative;overflow:hidden}
+.soc::before{content:'';position:absolute;inset:0;background:var(--sb);opacity:0;transition:.3s}
+.soc:hover::before{opacity:1}
+.soc:hover{transform:translateY(-4px);border-color:transparent;color:#fff;box-shadow:0 8px 25px rgba(131,56,236,.3)}
+.soc i{position:relative;z-index:1}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.05);padding-top:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
+.footer-bottom p{color:#334155;font-size:.83rem}
+.footer-bottom .gr{background:linear-gradient(135deg,var(--neon1),var(--neon2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:600}
+.made-with{display:flex;align-items:center;gap:6px;font-size:.8rem;color:#334155}
+.heart{animation:heartbeat 1.5s ease infinite}
+@keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}
+
+/* ANIMATIONS */
+.fade-up{opacity:0;transform:translateY(50px);transition:opacity .8s ease,transform .8s ease}
+.fade-left{opacity:0;transform:translateX(-50px);transition:opacity .8s ease,transform .8s ease}
+.fade-right{opacity:0;transform:translateX(50px);transition:opacity .8s ease,transform .8s ease}
+.fade-scale{opacity:0;transform:scale(.9);transition:opacity .8s ease,transform .8s ease}
+.vis{opacity:1!important;transform:none!important}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-inner > *{animation:fadeInUp .8s ease both}
+.hero-inner > *:nth-child(1){animation-delay:.2s}
+.hero-inner > *:nth-child(2){animation-delay:.4s}
+.hero-inner > *:nth-child(3){animation-delay:.6s}
+.hero-inner > *:nth-child(4){animation-delay:.7s}
+.hero-inner > *:nth-child(5){animation-delay:.8s}
+.hero-inner > *:nth-child(6){animation-delay:.9s}
+.hero-inner > *:nth-child(7){animation-delay:1s}
+
+/* NEON DIVIDER */
+.neon-divider{height:2px;background:linear-gradient(90deg,transparent,var(--neon4),var(--neon2),var(--neon1),var(--neon3),var(--neon5),transparent);margin:0;opacity:.5;position:relative;z-index:1;box-shadow:0 0 15px rgba(131,56,236,.3)}
+
+@media(max-width:1024px){.about-wrap,.contact-wrap,.footer-grid{grid-template-columns:1fr}.section{padding:80px 30px}nav{padding:15px 25px}.hero-name{font-size:2.8rem}.f-row{grid-template-columns:1fr}}
+@media(max-width:768px){.nav-links{display:none}.hero-name{font-size:2.2rem}.hero-stats{flex-direction:column}.stat-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.06)}.stat-item:last-child{border-bottom:none}.info-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursorTrail"></div>
+
+<div class="aurora">
+  <div class="aurora-layer a1"></div>
+  <div class="aurora-layer a2"></div>
+  <div class="aurora-layer a3"></div>
+  <div class="aurora-layer a4"></div>
+  <div class="aurora-layer a5"></div>
+  <div class="aurora-layer a6"></div>
+</div>
+<canvas id="bg-canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <span class="nav-logo-text">Shebin.dev</span>
+    <span class="nav-logo-dot"></span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#contact" class="nav-cta">Hire Me</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="avatar-container">
+      <div class="avatar-hex">
+        <div class="avatar-pulse"></div>
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="hexGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#ff006e"/>
+              <stop offset="33%" style="stop-color:#8338ec"/>
+              <stop offset="66%" style="stop-color:#3a86ff"/>
+              <stop offset="100%" style="stop-color:#06d6a0"/>
+            </linearGradient>
+          </defs>
+          <polygon points="50,2 95,26 95,74 50,98 5,74 5,26" fill="none" stroke="url(#hexGrad)" stroke-width="2.5"/>
+          <polygon points="50,10 87,30 87,70 50,90 13,70 13,30" fill="none" stroke="url(#hexGrad)" stroke-width="1" opacity="0.4"/>
+        </svg>
+        <div class="avatar-hex-inner">&#129302;</div>
+      </div>
+      <div class="online-badge"><div class="online-dot"></div>Open to new projects</div>
+    </div>
+
+    <p class="hero-subtitle">Freelancer from Kerala &bull; I work with data &bull; I build apps</p>
+
+    <div class="glitch-wrap">
+      <h1 class="hero-name" data-text="Shebin S Illikkal">Shebin S Illikkal</h1>
+    </div>
+
+    <div class="typed-line">
+      <span class="typed-label">I build</span>
+      <span class="typed-el" id="typed">ML Systems</span>
+    </div>
+
+    <p class="hero-desc">Turning raw data into powerful insights. Engineering intelligent ML systems & AI-powered applications. Crafting seamless full-stack & mobile experiences that drive real-world results.</p>
+
+    <div class="hero-contact-row">
+      <a href="tel:+919745461686" class="contact-badge cb-phone"><i class="fas fa-phone"></i> +91 9745461686</a>
+      <span class="contact-badge cb-freelance"><i class="fas fa-laptop-code"></i> Open to Freelance</span>
+    </div>
+
+    <div class="hero-btns">
+      <a href="#projects" class="btn-neon bn1">&#128269; View My Work</a>
+      <a href="#contact" class="btn-neon bn2" onclick="document.getElementById('contact-name').focus();return false;" id="hero-talk-btn">&#128222; Let's Talk</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item"><div class="stat-num s1" data-count="47">0</div><div class="stat-label">Projects</div></div>
+      <div class="stat-item"><div class="stat-num s2" data-count="3">0</div><div class="stat-label">Years Exp</div></div>
+      <div class="stat-item"><div class="stat-num s3" data-count="23">0</div><div class="stat-label">Clients</div></div>
+      <div class="stat-item"><div class="stat-num s4" data-count="6">0</div><div class="stat-label">Tech Stacks</div></div>
+    </div>
+  </div>
+  <canvas id="wave-canvas" style="position:absolute;bottom:0;left:0;width:100%;height:120px;z-index:0;opacity:.4;pointer-events:none"></canvas>
+  <div class="scroll-indicator" style="z-index:2;position:absolute">
+    <span class="scroll-text">scroll down</span>
+    <div class="scroll-line"></div>
+  </div>
+</div>
+
+<div class="neon-divider"></div>
+
+<!-- ABOUT -->
+<section class="section" id="about" style="position:relative;z-index:1">
+  <div class="section-header fade-up">
+    <div class="section-eyebrow"><i class="fas fa-user-astronaut"></i> About Me</div>
+    <h2>A bit about <span class="highlight">me</span></h2>
+    <p>Freelancer &bull; data person &bull; I also build apps when needed</p>
+  </div>
+  <div class="about-wrap">
+    <div class="fade-left">
+      <div class="about-card">
+        <p>Hi! I am <span class="hl-pink">Shebin S Illikkal</span>, a freelance <span class="hl-cyan">Data Scientist & Analytics Expert</span> based in Kerala, India. I am passionate about transforming complex data into actionable intelligence.</p>
+        <p>I have <span class="hl">solid expertise in Machine Learning, Python, and Data Analytics</span> — building predictive models, automated pipelines, and intelligent systems that solve real business problems.</p>
+        <p>Beyond data, I craft complete products: <span class="hl-pink">FlutterFlow mobile apps</span>, <span class="hl-cyan">full-stack web systems</span>, and <span class="hl">AI-powered cloud applications</span> using Claude AI (Anthropic).</p>
+        <div class="info-grid">
+          <div class="info-item"><i class="fas fa-user"></i> Shebin S Illikkal</div>
+          <div class="info-item"><i class="fas fa-phone"></i> +91 9745461686</div>
+          <div class="info-item"><i class="fas fa-map-marker-alt"></i> Kerala, India</div>
+          <div class="info-item"><i class="fas fa-briefcase"></i> Freelancer</div>
+          <div class="info-item"><i class="fas fa-robot"></i> Claude AI Expert</div>
+          <div class="info-item"><i class="fas fa-mobile-alt"></i> FlutterFlow Dev</div>
+          <div class="info-item"><i class="fas fa-code"></i> Full-Stack Dev</div>
+          <div class="info-item"><i class="fas fa-chart-bar"></i> Data Scientist</div>
+        </div>
+      </div>
+    </div>
+    <div class="fade-right">
+      <div class="about-right">
+        <div class="neon-bubble-grid">
+          <span class="nbub nb1">&#129302; Machine Learning</span>
+          <span class="nbub nb2">&#128013; Python</span>
+          <span class="nbub nb3">&#128202; Data Analytics</span>
+          <span class="nbub nb4">&#128241; FlutterFlow</span>
+          <span class="nbub nb5">&#9729; Claude AI</span>
+          <span class="nbub nb6">&#128295; Backend Dev</span>
+          <span class="nbub nb1">&#127760; Frontend Dev</span>
+          <span class="nbub nb2">&#128200; Deep Learning</span>
+          <span class="nbub nb3">&#128736; App Development</span>
+          <span class="nbub nb4">&#128270; NLP & AI</span>
+          <span class="nbub nb5">&#127381; REST APIs</span>
+          <span class="nbub nb6">&#128196; Data Science</span>
+        </div>
+        <div class="claude-card">
+          <div class="claude-card-inner">
+            <h4><i class="fas fa-robot" style="color:#a78bfa"></i> <span>Claude AI & Cloud — Solid Knowledge</span></h4>
+            <p>Hands-on expertise with <strong style="color:#e2d9f3">Claude AI (Anthropic)</strong> for building intelligent apps, AI-powered automation, Claude API integrations, and cloud-native ML pipelines. Proficient with Claude Code for advanced engineering, AI agent systems, and intelligent workflow automation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="neon-divider"></div>
+
+<!-- SKILLS -->
+<section class="section" id="skills" style="background:rgba(58,134,255,.04);position:relative;z-index:1">
+  <div class="section-header fade-up">
+    <div class="section-eyebrow"><i class="fas fa-fire"></i> Expertise</div>
+    <h2>Technical <span class="highlight">Skills</span></h2>
+    <p>Deep proficiency across Data Science, AI, Mobile & Full-Stack Development</p>
+  </div>
+  <div class="skills-wrap">
+
+    <div class="sk-group fade-up" style="--gk:linear-gradient(135deg,#ff006e,#8338ec)">
+      <div class="sk-head"><div class="sk-ico">&#128200;</div><h3>Machine Learning & AI</h3></div>
+      <div class="sk-item"><div class="sk-row"><span class="sk-name">Machine Learning</span><span class="sk-pct">95%</span></div><div class="sk-bar"><div class="sk-fill" data-w="95"></div></div></div>
+      <div class="sk-item"><div class="sk-row"><span class="sk-name">Deep Learning</span><span class="sk-pct">88%</span></div><div class="sk-bar"><div class="sk-fill" data-w="88"></div></div></div>
+      <div class="sk-item"><div class="sk-row"><span class="sk-name">Data Analytics</span><span class="sk-pct">97%</span></div><div class="sk-bar"><div class="sk-fill" data-w="97"></div></div></div>
+      <div class="sk-item"><div class="sk-row"><span class="sk-name">NLP & Text Analytics</span><span class="sk-pct">85%</span></div><div class="sk-bar"><div class="sk-fill" data-w="85"></div></div></div>
+    </div>
+
+    <div class="sk-group fade-up" style="--gk:linear-gradient(135deg,#3a86ff,#06d6a0)">
+      <div class="sk-head"><div class="sk-ico">&#128013;</div><h3>Python & Libraries</h3></div>
+      <div class="sk-item"><div class="sk-row"><span class="sk-name">Python</span><span class="sk-pct">96%</span></div><div class="sk-bar"><div class="sk-fill" data-w="96"></div></div></div>
+      <div class="sk-item"><div class="sk-row"><span class="sk-name">Pandas / NumPy</span><span class="sk-pct">95%</span></div><div class="sk-bar"><div class="sk-fill" data-w="95"></div></div></div>
+      <div class="sk-item"><div class="sk-row"><span class="sk-name">TensorFlow / PyTorch</span><span class="sk-pct">87%</span></div><div class="sk-bar"><div class="sk-fill" data-w="87"></div></div></div>
+      <div class="sk-item"><div class="sk-row"><span class="sk-name">Scikit-Learn</span><span class="sk-pct">93%</span></div><div class="sk-bar"><div class="sk-fill" data-w="93"></div></div></div>
+    </div>
+
+    <div class="sk-group fade-up" style="--gk:linear-gradient(135deg,#ffbe0b,#fb5607)">
+      <div class="sk-head"><div class="sk-ico">&#128241;</div><h3>App Development</h3></div>
+      <div class="sk-item"><div class="sk-row"><span class="sk-name">FlutterFlow</span><span class="sk-pct">92%</span></div><div class="sk-bar"><div class="sk-fill" data-w="92"></div></div></div>
+      <div class="sk-item"><div class="sk-row"><span class="sk-name">Flutter / Dart</span><span class="sk-pct">85%</span></div><div class="sk-bar"><div class="sk-fill" data-w="85"></div></div></div>
+      <div class="sk-item"><div class="sk-row"><span class="sk-name">React Native</span><span class="sk-pct">78%</span></div><div class="sk-bar"><div class="sk-fill" data-w="78"></div></div></div>
+      <div class="sk-item"><div class="sk-row"><span class="sk-name">REST API Integration</span><span class="sk-pct">94%</span></div><div class="sk-bar"><div class="sk-fill" data-w="94"></div></div></div>
+    </div>
+
+    <div class="sk-group fade-up" style="--gk:linear-gradient(135deg,#8338ec,#3a86ff)">
+      <div class="sk-head"><div class="sk-ico">&#127760;</div><h3>Frontend Development</h3></div>
+      <div class="sk-item"><div class="sk-row"><span class="sk-name">HTML / CSS / JS</span><span class="sk-pct">95%</span></div><div class="sk-bar"><div class="sk-fill" data-w="95"></div></div></div>
+      <div class="sk-item"><div class="sk-row"><span class="sk-name">React.js</span><span class="sk-pct">85%</span></div><div class="sk-bar"><div class="sk-fill" data-w="85"></div></div></div>
+      <div class="sk-item"><div class="sk-row"><span class="sk-name">TypeScript</span><span class="sk-pct">82%</span></div><div class="sk-bar"><div class="sk-fill" data-w="82"></div></div></div>
+      <div class="sk-item"><div class="sk-row"><span class="sk-name">UI/UX Design</span><span class="sk-pct">80%</span></div><div class="sk-bar"><div class="sk-fill" data-w="80"></div></div></div>
+    </div>
+
+    <div class="sk-group fade-up" style="--gk:linear-gradient(135deg,#06d6a0,#3a86ff)">
+      <div class="sk-head"><div class="sk-ico">&#128295;</div><h3>Backend Development</h3></div>
+      <div class="sk-item"><div class="sk-row"><span class="sk-name">FastAPI / Django</span><span class="sk-pct">90%</span></div><div class="sk-bar"><div class="sk-fill" data-w="90"></div></div></div>
+      <div class="sk-item"><div class="sk-row"><span class="sk-name">Node.js / Express</span><span class="sk-pct">87%</span></div><div class="sk-bar"><div class="sk-fill" data-w="87"></div></div></div>
+      <div class="sk-item"><div class="sk-row"><span class="sk-name">SQL / PostgreSQL</span><span class="sk-pct">88%</span></div><div class="sk-bar"><div class="sk-fill" data-w="88"></div></div></div>
+      <div class="sk-item"><div class="sk-row"><span class="sk-name">Firebase / Supabase</span><span class="sk-pct">85%</span></div><div class="sk-bar"><div class="sk-fill" data-w="85"></div></div></div>
+    </div>
+
+    <div class="sk-group fade-up" style="--gk:linear-gradient(135deg,#ff006e,#3a86ff)">
+      <div class="sk-head"><div class="sk-ico">&#9729;</div><h3>Cloud & AI Tools</h3></div>
+      <div class="sk-item"><div class="sk-row"><span class="sk-name">Claude AI (Anthropic)</span><span class="sk-pct">98%</span></div><div class="sk-bar"><div class="sk-fill" data-w="98"></div></div></div>
+      <div class="sk-item"><div class="sk-row"><span class="sk-name">AWS / GCP</span><span class="sk-pct">82%</span></div><div class="sk-bar"><div class="sk-fill" data-w="82"></div></div></div>
+      <div class="sk-item"><div class="sk-row"><span class="sk-name">MLOps & Deployment</span><span class="sk-pct">84%</span></div><div class="sk-bar"><div class="sk-fill" data-w="84"></div></div></div>
+      <div class="sk-item"><div class="sk-row"><span class="sk-name">Docker / DevOps</span><span class="sk-pct">78%</span></div><div class="sk-bar"><div class="sk-fill" data-w="78"></div></div></div>
+    </div>
+
+  </div>
+</section>
+
+<div class="neon-divider"></div>
+
+<!-- SERVICES -->
+<section class="section" id="services" style="background:rgba(255,0,110,.03);position:relative;z-index:1">
+  <div class="section-header fade-up">
+    <div class="section-eyebrow"><i class="fas fa-rocket"></i> What I Offer</div>
+    <h2>What I <span class="highlight">do</span></h2>
+    <p>What I actually offer clients — no fluff, just the stuff I've done before</p>
+  </div>
+  <div class="srv-wrap">
+    <div class="srv-card fade-up" style="--sc:linear-gradient(135deg,#ff006e,#8338ec)">
+      <div class="srv-ico">&#129302;</div>
+      <h3>Machine Learning & AI</h3>
+      <p>I build ML stuff that actually ships — predictive models, computer vision, NLP, automation. I've done enough of these to know what works and what looks impressive but breaks when real data shows up.</p>
+      <div class="srv-tags"><span class="srv-tag">TensorFlow</span><span class="srv-tag">PyTorch</span><span class="srv-tag">Scikit-Learn</span><span class="srv-tag">Claude AI</span><span class="srv-tag">OpenCV</span></div>
+    </div>
+    <div class="srv-card fade-up" style="--sc:linear-gradient(135deg,#3a86ff,#06d6a0)">
+      <div class="srv-ico">&#128202;</div>
+      <h3>Data Analytics & BI</h3>
+      <p>Cleaning messy data, finding patterns in it, and putting it in front of people in a way that makes sense. Dashboards, reports, SQL queries that don't time out. I use Python mostly, Power BI when clients need it.</p>
+      <div class="srv-tags"><span class="srv-tag">Python</span><span class="srv-tag">Pandas</span><span class="srv-tag">Power BI</span><span class="srv-tag">Tableau</span><span class="srv-tag">SQL</span></div>
+    </div>
+    <div class="srv-card fade-up" style="--sc:linear-gradient(135deg,#ffbe0b,#fb5607)">
+      <div class="srv-ico">&#128241;</div>
+      <h3>Mobile App Development</h3>
+      <p>I build mobile apps with FlutterFlow — it's faster than coding from scratch and the output is actually good quality. Firebase for the backend usually. Works well for most client budgets and timelines.</p>
+      <div class="srv-tags"><span class="srv-tag">FlutterFlow</span><span class="srv-tag">Flutter</span><span class="srv-tag">Dart</span><span class="srv-tag">Firebase</span><span class="srv-tag">Stripe</span></div>
+    </div>
+    <div class="srv-card fade-up" style="--sc:linear-gradient(135deg,#8338ec,#3a86ff)">
+      <div class="srv-ico">&#127760;</div>
+      <h3>Full-Stack Web Development</h3>
+      <p>Full web apps when clients need them — React on the front, Node or FastAPI on the back, a database that makes sense for the use case. I'm not a designer but I can put together something that looks decent and works reliably.</p>
+      <div class="srv-tags"><span class="srv-tag">React</span><span class="srv-tag">Node.js</span><span class="srv-tag">FastAPI</span><span class="srv-tag">PostgreSQL</span><span class="srv-tag">Docker</span></div>
+    </div>
+    <div class="srv-card fade-up" style="--sc:linear-gradient(135deg,#06d6a0,#3a86ff)">
+      <div class="srv-ico">&#9729;</div>
+      <h3>Claude AI & Cloud Integration</h3>
+      <p>If you want Claude AI in your product, I can help. I've done chatbots, document Q&amp;A tools, workflow automation. I know the API well enough to build something that actually works, not just a demo.</p>
+      <div class="srv-tags"><span class="srv-tag">Claude API</span><span class="srv-tag">AWS</span><span class="srv-tag">GCP</span><span class="srv-tag">MLOps</span><span class="srv-tag">LangChain</span></div>
+    </div>
+    <div class="srv-card fade-up" style="--sc:linear-gradient(135deg,#ff006e,#ffbe0b)">
+      <div class="srv-ico">&#128200;</div>
+      <h3>Data Science Consulting</h3>
+      <p>Sometimes people just need someone to look at their data problem and say "here's what I'd actually do." I can do that — help figure out the right approach before spending money building the wrong thing.</p>
+      <div class="srv-tags"><span class="srv-tag">Strategy</span><span class="srv-tag">MLOps</span><span class="srv-tag">Architecture</span><span class="srv-tag">Optimization</span><span class="srv-tag">Research</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="neon-divider"></div>
+
+<!-- PROJECTS -->
+<section class="section" id="projects" style="background:rgba(131,56,236,.04);position:relative;z-index:1">
+  <div class="section-header fade-up">
+    <div class="section-eyebrow"><i class="fas fa-layer-group"></i> Portfolio</div>
+    <h2>Some of my <span class="highlight">work</span></h2>
+    <p>Projects I've built for clients and some personal ones — all real, all shipped</p>
+  </div>
+  <div class="proj-wrap">
+    <div class="proj-card fade-up">
+      <div class="proj-img" style="background:linear-gradient(135deg,#ff006e22,#8338ec44,#3a86ff22)">&#129302;</div>
+      <div class="proj-badge">AI Powered</div>
+      <div class="proj-body"><h3>AI Analytics Platform</h3><p>A client needed their team to query sales data without knowing SQL. Built a dashboard with Claude AI underneath so they could just ask questions in plain English and get answers back. Took about 3 weeks.</p><div class="proj-tech"><span class="pt">Python</span><span class="pt">Claude AI</span><span class="pt">FastAPI</span><span class="pt">React</span></div><div class="proj-links"><a href="#" class="pln pln1">Live Demo</a><a href="#" class="pln pln2">GitHub</a></div></div>
+    </div>
+    <div class="proj-card fade-up">
+      <div class="proj-img" style="background:linear-gradient(135deg,#3a86ff22,#06d6a044)">&#128202;</div>
+      <div class="proj-badge">94% Accuracy</div>
+      <div class="proj-body"><h3>ML Sales Forecasting</h3><p>Retail client wanted to stop guessing stock orders. Built an XGBoost ensemble on their historical sales, hooked it into their existing system. Ended up around 94% accurate on weekly forecasts.</p><div class="proj-tech"><span class="pt">XGBoost</span><span class="pt">Pandas</span><span class="pt">AWS</span><span class="pt">Scikit-Learn</span></div><div class="proj-links"><a href="#" class="pln pln1">Case Study</a><a href="#" class="pln pln2">GitHub</a></div></div>
+    </div>
+    <div class="proj-card fade-up">
+      <div class="proj-img" style="background:linear-gradient(135deg,#ffbe0b22,#fb560744)">&#128241;</div>
+      <div class="proj-badge">FlutterFlow</div>
+      <div class="proj-body"><h3>E-Commerce Mobile App</h3><p>Built a shopping app for a local business that was taking orders over WhatsApp. FlutterFlow for the UI, Firebase for stock, Stripe for payments. They got proper order management for the first time.</p><div class="proj-tech"><span class="pt">FlutterFlow</span><span class="pt">Firebase</span><span class="pt">Stripe</span><span class="pt">Python</span></div><div class="proj-links"><a href="#" class="pln pln1">App Store</a><a href="#" class="pln pln2">Details</a></div></div>
+    </div>
+    <div class="proj-card fade-up">
+      <div class="proj-img" style="background:linear-gradient(135deg,#8338ec22,#ff006e44)">&#128200;</div>
+      <div class="proj-badge">96% Recall</div>
+      <div class="proj-body"><h3>Customer Churn Prediction</h3><p>SaaS company was losing users and didn't know who was about to leave until it was too late. Trained a model on their user behavior data, plugged it into their CRM. Their team now gets a heads-up a week before someone churns.</p><div class="proj-tech"><span class="pt">TensorFlow</span><span class="pt">Python</span><span class="pt">FastAPI</span><span class="pt">PostgreSQL</span></div><div class="proj-links"><a href="#" class="pln pln1">Demo</a><a href="#" class="pln pln2">Paper</a></div></div>
+    </div>
+    <div class="proj-card fade-up">
+      <div class="proj-img" style="background:linear-gradient(135deg,#06d6a022,#3a86ff44)">&#9729;</div>
+      <div class="proj-badge">Claude API</div>
+      <div class="proj-body"><h3>Claude AI Support Bot</h3><p>A company had 200+ internal policy documents that nobody read. Built a bot with Claude API that answers employee questions by actually reading those docs. People use it daily now — the HR team is surprised.</p><div class="proj-tech"><span class="pt">Claude API</span><span class="pt">Node.js</span><span class="pt">React</span><span class="pt">MongoDB</span></div><div class="proj-links"><a href="#" class="pln pln1">Live Demo</a><a href="#" class="pln pln2">GitHub</a></div></div>
+    </div>
+    <div class="proj-card fade-up">
+      <div class="proj-img" style="background:linear-gradient(135deg,#3a86ff22,#8338ec44)">&#128270;</div>
+      <div class="proj-badge">1M+ Records/day</div>
+      <div class="proj-body"><h3>Automated Data Pipeline</h3><p>Client had analysts spending half their week on manual data cleanup. Automated the whole thing — pulls from 10 sources, cleans and validates, lands it in the right place every morning at 6 AM. Nobody touches it now.</p><div class="proj-tech"><span class="pt">Python</span><span class="pt">Apache Kafka</span><span class="pt">Spark</span><span class="pt">GCP</span></div><div class="proj-links"><a href="#" class="pln pln1">Details</a><a href="#" class="pln pln2">GitHub</a></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="neon-divider"></div>
+
+<!-- TOOLS -->
+<section class="section" id="tools" style="background:rgba(6,214,160,.03);position:relative;z-index:1">
+  <div class="section-header fade-up">
+    <div class="section-eyebrow"><i class="fas fa-tools"></i> My Arsenal</div>
+    <h2>Tools I <span class="highlight">actually use</span></h2>
+    <p>Things I work with regularly — and a real project for each one</p>
+  </div>
+  <div class="tools-wrap fade-scale">
+
+    <!-- 1. PYTHON -->
+    <div class="tool" style="--ti:linear-gradient(135deg,rgba(58,134,255,.25),rgba(6,214,160,.15));--tg:rgba(58,134,255,.09);--tf:#3a86ff">
+      <div class="tool-top">
+        <div class="tool-top-icon" style="--ti:linear-gradient(135deg,rgba(58,134,255,.3),rgba(6,214,160,.2))">&#128013;</div>
+        <div class="tool-top-text">
+          <div class="tool-name">Python</div>
+          <div class="tool-category">Core Language</div>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-proj-title"><span>&#128202;</span> DataFlow Automation Suite</div>
+        <div class="tool-proj-desc">A client was spending 3 hours a day moving data between systems manually. Built this to handle the whole thing automatically — pulls from 10+ sources, fixes the messy bits, lands data where it needs to go. Runs every morning without fail.</div>
+        <div class="tool-features">
+          <div class="tool-feat">Processes 2M+ records/day with zero manual intervention</div>
+          <div class="tool-feat">Dynamic schema detection and auto-type-casting engine</div>
+          <div class="tool-feat">Integrated anomaly flagging with email/Slack alerting</div>
+          <div class="tool-feat">CLI dashboard with live progress &amp; error tracking</div>
+        </div>
+        <div class="tool-tags"><span class="tool-tag">Python 3.11</span><span class="tool-tag">Pandas</span><span class="tool-tag">NumPy</span><span class="tool-tag">Celery</span><span class="tool-tag">Redis</span></div>
+      </div>
+      <div class="tool-footer"><span class="tool-status"><span class="tool-status-dot"></span>Live</span><span class="tool-year">2024</span></div>
+    </div>
+
+    <!-- 2. CLAUDE AI -->
+    <div class="tool" style="--ti:linear-gradient(135deg,rgba(131,56,236,.25),rgba(255,0,110,.15));--tg:rgba(131,56,236,.09);--tf:#8338ec">
+      <div class="tool-top">
+        <div class="tool-top-icon" style="--ti:linear-gradient(135deg,rgba(131,56,236,.3),rgba(255,0,110,.2))">&#129302;</div>
+        <div class="tool-top-text">
+          <div class="tool-name">Claude AI</div>
+          <div class="tool-category">AI Expert</div>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-proj-title"><span>&#9729;</span> SmartAssist Enterprise Platform</div>
+        <div class="tool-proj-desc">Company had 200+ internal docs nobody read. Built a bot using the Claude API that can actually find answers inside those docs. Employees ask it questions in plain English. The HR team didn't believe it would work until they tested it.</div>
+        <div class="tool-features">
+          <div class="tool-feat">Claude API integration with custom system prompts &amp; tool use</div>
+          <div class="tool-feat">Document ingestion — PDF, DOCX, CSV parsed and queried in natural language</div>
+          <div class="tool-feat">Conversation memory with context compression for long sessions</div>
+          <div class="tool-feat">Admin dashboard showing usage, costs, and conversation analytics</div>
+        </div>
+        <div class="tool-tags"><span class="tool-tag">Claude API</span><span class="tool-tag">FastAPI</span><span class="tool-tag">React</span><span class="tool-tag">LangChain</span><span class="tool-tag">PostgreSQL</span></div>
+      </div>
+      <div class="tool-footer"><span class="tool-status"><span class="tool-status-dot"></span>Live</span><span class="tool-year">2024</span></div>
+    </div>
+
+    <!-- 3. FLUTTERFLOW -->
+    <div class="tool" style="--ti:linear-gradient(135deg,rgba(255,190,11,.25),rgba(251,86,7,.15));--tg:rgba(255,190,11,.08);--tf:#ffbe0b">
+      <div class="tool-top">
+        <div class="tool-top-icon" style="--ti:linear-gradient(135deg,rgba(255,190,11,.3),rgba(251,86,7,.2))">&#128241;</div>
+        <div class="tool-top-text">
+          <div class="tool-name">FlutterFlow</div>
+          <div class="tool-category">Mobile App Dev</div>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-proj-title"><span>&#128734;</span> ShopEase — Smart E-Commerce App</div>
+        <div class="tool-proj-desc">Client needed a proper shopping app but didn't have a huge budget or months to wait. Used FlutterFlow — it moved fast and the result was solid. Firebase for stock, Stripe for payments. They went from WhatsApp orders to a real app in 6 weeks.</div>
+        <div class="tool-features">
+          <div class="tool-feat">AI product recommendation engine with 35% upsell conversion</div>
+          <div class="tool-feat">Real-time inventory sync via Firebase — zero oversell issues</div>
+          <div class="tool-feat">Stripe &amp; Razorpay dual payment gateway integration</div>
+          <div class="tool-feat">Push notifications, wishlists, reviews &amp; loyalty rewards system</div>
+        </div>
+        <div class="tool-tags"><span class="tool-tag">FlutterFlow</span><span class="tool-tag">Firebase</span><span class="tool-tag">Stripe</span><span class="tool-tag">Dart</span><span class="tool-tag">Python</span></div>
+      </div>
+      <div class="tool-footer"><span class="tool-status"><span class="tool-status-dot"></span>Live on Play Store</span><span class="tool-year">2024</span></div>
+    </div>
+
+    <!-- 4. TENSORFLOW -->
+    <div class="tool" style="--ti:linear-gradient(135deg,rgba(255,0,110,.25),rgba(131,56,236,.15));--tg:rgba(255,0,110,.08);--tf:#ff006e">
+      <div class="tool-top">
+        <div class="tool-top-icon" style="--ti:linear-gradient(135deg,rgba(255,0,110,.3),rgba(131,56,236,.2))">&#128200;</div>
+        <div class="tool-top-text">
+          <div class="tool-name">TensorFlow</div>
+          <div class="tool-category">Deep Learning</div>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-proj-title"><span>&#128065;</span> VisionGuard — AI Security System</div>
+        <div class="tool-proj-desc">Started as a demo I built to test TensorFlow on live CCTV footage. Trained it to spot unauthorized entry and fire. Showed a client, they wanted it installed. It's been running at their warehouse for over a year — caught two real incidents.</div>
+        <div class="tool-features">
+          <div class="tool-feat">Custom YOLO-based detection model trained on 50K+ labeled frames</div>
+          <div class="tool-feat">Real-time 30 FPS inference on edge hardware (Jetson Nano)</div>
+          <div class="tool-feat">Multi-camera dashboard with event timeline &amp; clip playback</div>
+          <div class="tool-feat">SMS/WhatsApp/email alerts within 2 seconds of detection</div>
+        </div>
+        <div class="tool-tags"><span class="tool-tag">TensorFlow</span><span class="tool-tag">OpenCV</span><span class="tool-tag">Python</span><span class="tool-tag">FastAPI</span><span class="tool-tag">MQTT</span></div>
+      </div>
+      <div class="tool-footer"><span class="tool-status"><span class="tool-status-dot"></span>Deployed</span><span class="tool-year">2023</span></div>
+    </div>
+
+    <!-- 5. REACT.JS -->
+    <div class="tool" style="--ti:linear-gradient(135deg,rgba(6,214,160,.25),rgba(58,134,255,.15));--tg:rgba(6,214,160,.08);--tf:#06d6a0">
+      <div class="tool-top">
+        <div class="tool-top-icon" style="--ti:linear-gradient(135deg,rgba(6,214,160,.3),rgba(58,134,255,.2))">&#9889;</div>
+        <div class="tool-top-text">
+          <div class="tool-name">React.js</div>
+          <div class="tool-category">Frontend</div>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-proj-title"><span>&#128248;</span> AnalytiX — Real-Time Data Dashboard</div>
+        <div class="tool-proj-desc">Client wanted their whole team looking at the same live numbers without emailing spreadsheets around. Built a React dashboard with real-time charts — data updates every few seconds via WebSocket. People actually use it in their morning standups now.</div>
+        <div class="tool-features">
+          <div class="tool-feat">40+ chart types with drag-and-drop widget layout builder</div>
+          <div class="tool-feat">Live WebSocket feeds with sub-second refresh rates</div>
+          <div class="tool-feat">Multi-tenant with role-based access control (RBAC)</div>
+          <div class="tool-feat">PDF/PNG export, scheduled email reports &amp; embed iframes</div>
+        </div>
+        <div class="tool-tags"><span class="tool-tag">React 18</span><span class="tool-tag">TypeScript</span><span class="tool-tag">D3.js</span><span class="tool-tag">WebSocket</span><span class="tool-tag">TailwindCSS</span></div>
+      </div>
+      <div class="tool-footer"><span class="tool-status"><span class="tool-status-dot"></span>Live SaaS</span><span class="tool-year">2024</span></div>
+    </div>
+
+    <!-- 6. NODE.JS -->
+    <div class="tool" style="--ti:linear-gradient(135deg,rgba(6,214,160,.2),rgba(58,134,255,.2));--tg:rgba(6,214,160,.07);--tf:#06d6a0">
+      <div class="tool-top">
+        <div class="tool-top-icon" style="--ti:linear-gradient(135deg,rgba(6,214,160,.3),rgba(58,134,255,.2))">&#128295;</div>
+        <div class="tool-top-text">
+          <div class="tool-name">Node.js</div>
+          <div class="tool-category">Backend</div>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-proj-title"><span>&#128279;</span> APIForge — Enterprise API Gateway</div>
+        <div class="tool-proj-desc">Backend for a product with multiple services that kept stepping on each other. Built a central gateway with Node — handles auth, routes requests to the right service, and rate limits so nothing gets flooded. It's boring infrastructure that quietly does its job.</div>
+        <div class="tool-features">
+          <div class="tool-feat">JWT + OAuth2 authentication with refresh token rotation</div>
+          <div class="tool-feat">Redis-based rate limiting — 99.98% uptime SLA maintained</div>
+          <div class="tool-feat">Real-time API usage analytics with latency percentile tracking</div>
+          <div class="tool-feat">Auto-generated Swagger docs &amp; Postman collection sync</div>
+        </div>
+        <div class="tool-tags"><span class="tool-tag">Node.js</span><span class="tool-tag">Express</span><span class="tool-tag">Redis</span><span class="tool-tag">JWT</span><span class="tool-tag">Nginx</span></div>
+      </div>
+      <div class="tool-footer"><span class="tool-status"><span class="tool-status-dot"></span>Production</span><span class="tool-year">2024</span></div>
+    </div>
+
+    <!-- 7. POWER BI -->
+    <div class="tool" style="--ti:linear-gradient(135deg,rgba(255,190,11,.2),rgba(251,86,7,.15));--tg:rgba(255,190,11,.07);--tf:#ffbe0b">
+      <div class="tool-top">
+        <div class="tool-top-icon" style="--ti:linear-gradient(135deg,rgba(255,190,11,.3),rgba(251,86,7,.2))">&#128202;</div>
+        <div class="tool-top-text">
+          <div class="tool-name">Power BI</div>
+          <div class="tool-category">Business Intelligence</div>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-proj-title"><span>&#128185;</span> BizInsight 360 — BI Platform</div>
+        <div class="tool-proj-desc">Retail client had 50 stores and zero visibility into which ones were actually performing. Built Power BI dashboards pulling from their POS system. Now the owner can see everything in one place from his phone. He checks it every morning apparently.</div>
+        <div class="tool-features">
+          <div class="tool-feat">Live sales dashboards refreshing every 15 minutes via DirectQuery</div>
+          <div class="tool-feat">Custom DAX measures for YoY, MoM, &amp; rolling 90-day comparisons</div>
+          <div class="tool-feat">Regional heatmaps and inventory forecast visuals</div>
+          <div class="tool-feat">Row-level security — each store manager sees only their data</div>
+        </div>
+        <div class="tool-tags"><span class="tool-tag">Power BI</span><span class="tool-tag">DAX</span><span class="tool-tag">Power Query</span><span class="tool-tag">SQL</span><span class="tool-tag">Azure</span></div>
+      </div>
+      <div class="tool-footer"><span class="tool-status"><span class="tool-status-dot"></span>Live</span><span class="tool-year">2023</span></div>
+    </div>
+
+    <!-- 8. POSTGRESQL -->
+    <div class="tool" style="--ti:linear-gradient(135deg,rgba(58,134,255,.2),rgba(6,214,160,.15));--tg:rgba(58,134,255,.08);--tf:#3a86ff">
+      <div class="tool-top">
+        <div class="tool-top-icon" style="--ti:linear-gradient(135deg,rgba(58,134,255,.3),rgba(6,214,160,.2))">&#128451;</div>
+        <div class="tool-top-text">
+          <div class="tool-name">PostgreSQL</div>
+          <div class="tool-category">Database</div>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-proj-title"><span>&#128204;</span> DataVault CRM — Customer Platform</div>
+        <div class="tool-proj-desc">SaaS startup's database was getting slow and messy as they grew. Rebuilt the schema properly — partitioned the big tables, added the right indexes, rewrote the worst queries. What used to take 4 seconds now takes under 50ms.</div>
+        <div class="tool-features">
+          <div class="tool-feat">Partitioned tables — query speed improved 10x on time-series data</div>
+          <div class="tool-feat">Full-text search with tsvector indexing across all customer notes</div>
+          <div class="tool-feat">Automated backups, point-in-time recovery &amp; replication setup</div>
+          <div class="tool-feat">200+ stored procedures and triggers for business rule enforcement</div>
+        </div>
+        <div class="tool-tags"><span class="tool-tag">PostgreSQL 16</span><span class="tool-tag">PostGIS</span><span class="tool-tag">pgAdmin</span><span class="tool-tag">SQLAlchemy</span><span class="tool-tag">Alembic</span></div>
+      </div>
+      <div class="tool-footer"><span class="tool-status"><span class="tool-status-dot"></span>Production</span><span class="tool-year">2024</span></div>
+    </div>
+
+    <!-- 9. FIREBASE -->
+    <div class="tool" style="--ti:linear-gradient(135deg,rgba(251,86,7,.2),rgba(255,190,11,.15));--tg:rgba(251,86,7,.07);--tf:#fb5607">
+      <div class="tool-top">
+        <div class="tool-top-icon" style="--ti:linear-gradient(135deg,rgba(251,86,7,.3),rgba(255,190,11,.2))">&#128293;</div>
+        <div class="tool-top-text">
+          <div class="tool-name">Firebase</div>
+          <div class="tool-category">Backend-as-a-Service</div>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-proj-title"><span>&#128262;</span> ConnectLive — Social Chat Platform</div>
+        <div class="tool-proj-desc">Built a group chat app for a community platform using Firebase. The real-time stuff works really well with Firestore — messages just appear instantly. Got to 10K users before I had to think about scaling, which was a nice problem to have.</div>
+        <div class="tool-features">
+          <div class="tool-feat">Real-time Firestore listeners — messages delivered in &lt;100ms</div>
+          <div class="tool-feat">Firebase Auth with Google, Apple, phone OTP sign-in</div>
+          <div class="tool-feat">Cloud Functions for media processing &amp; spam detection</div>
+          <div class="tool-feat">FCM push notifications with rich media &amp; action buttons</div>
+        </div>
+        <div class="tool-tags"><span class="tool-tag">Firebase</span><span class="tool-tag">Firestore</span><span class="tool-tag">Cloud Functions</span><span class="tool-tag">FCM</span><span class="tool-tag">Flutter</span></div>
+      </div>
+      <div class="tool-footer"><span class="tool-status"><span class="tool-status-dot"></span>Live — 10K+ Users</span><span class="tool-year">2024</span></div>
+    </div>
+
+    <!-- 10. AWS / GCP -->
+    <div class="tool" style="--ti:linear-gradient(135deg,rgba(131,56,236,.2),rgba(58,134,255,.15));--tg:rgba(131,56,236,.08);--tf:#8338ec">
+      <div class="tool-top">
+        <div class="tool-top-icon" style="--ti:linear-gradient(135deg,rgba(131,56,236,.3),rgba(58,134,255,.2))">&#9729;</div>
+        <div class="tool-top-text">
+          <div class="tool-name">AWS / GCP</div>
+          <div class="tool-category">Cloud &amp; MLOps</div>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-proj-title"><span>&#128640;</span> CloudML Deploy — ML Deployment Platform</div>
+        <div class="tool-proj-desc">Client kept asking me to "just retrain the model" every time it drifted. Built a proper pipeline on AWS so the whole thing — retrain, validate, deploy — happens automatically when performance drops below a threshold. Nobody has to ask me anymore.</div>
+        <div class="tool-features">
+          <div class="tool-feat">CI/CD ML pipeline — code push to production inference in 12 min</div>
+          <div class="tool-feat">Auto-scaling endpoints handling 5K RPS burst traffic seamlessly</div>
+          <div class="tool-feat">Model drift detection with automated retraining triggers</div>
+          <div class="tool-feat">Cost optimizer — 60% infra cost reduction via spot instances</div>
+        </div>
+        <div class="tool-tags"><span class="tool-tag">AWS SageMaker</span><span class="tool-tag">GCP Vertex AI</span><span class="tool-tag">Terraform</span><span class="tool-tag">Docker</span><span class="tool-tag">MLflow</span></div>
+      </div>
+      <div class="tool-footer"><span class="tool-status"><span class="tool-status-dot"></span>Production</span><span class="tool-year">2024</span></div>
+    </div>
+
+    <!-- 11. FASTAPI -->
+    <div class="tool" style="--ti:linear-gradient(135deg,rgba(6,214,160,.2),rgba(58,134,255,.15));--tg:rgba(6,214,160,.07);--tf:#06d6a0">
+      <div class="tool-top">
+        <div class="tool-top-icon" style="--ti:linear-gradient(135deg,rgba(6,214,160,.3),rgba(58,134,255,.2))">&#128279;</div>
+        <div class="tool-top-text">
+          <div class="tool-name">FastAPI</div>
+          <div class="tool-category">API Framework</div>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-proj-title"><span>&#128308;</span> PredictAPI — ML Inference Service</div>
+        <div class="tool-proj-desc">Needed to serve a few different ML models through one API without slowing everything down. FastAPI was perfect — async, fast, and the auto-docs meant the client's frontend team could work independently without bugging me about endpoints.</div>
+        <div class="tool-features">
+          <div class="tool-feat">Async inference — 3,000+ simultaneous requests without blocking</div>
+          <div class="tool-feat">Multi-model registry with hot-swappable version routing</div>
+          <div class="tool-feat">Auto-generated OpenAPI / Swagger docs with live try-it-out</div>
+          <div class="tool-feat">Request validation, rate limiting &amp; usage metering built-in</div>
+        </div>
+        <div class="tool-tags"><span class="tool-tag">FastAPI</span><span class="tool-tag">Python</span><span class="tool-tag">Pydantic</span><span class="tool-tag">Uvicorn</span><span class="tool-tag">Redis</span></div>
+      </div>
+      <div class="tool-footer"><span class="tool-status"><span class="tool-status-dot"></span>Production</span><span class="tool-year">2024</span></div>
+    </div>
+
+    <!-- 12. PANDAS -->
+    <div class="tool" style="--ti:linear-gradient(135deg,rgba(58,134,255,.2),rgba(131,56,236,.15));--tg:rgba(58,134,255,.07);--tf:#3a86ff">
+      <div class="tool-top">
+        <div class="tool-top-icon" style="--ti:linear-gradient(135deg,rgba(58,134,255,.3),rgba(131,56,236,.2))">&#128196;</div>
+        <div class="tool-top-text">
+          <div class="tool-name">Pandas</div>
+          <div class="tool-category">Data Wrangling</div>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-proj-title"><span>&#128203;</span> DataClean Pro — ETL Pipeline Engine</div>
+        <div class="tool-proj-desc">Fintech client had data coming from 15 different places — different formats, different date styles, duplicates everywhere. Wrote a Pandas pipeline that handles all the cleaning and merging. Runs at 5 AM, and by the time analysts arrive, everything is ready.</div>
+        <div class="tool-features">
+          <div class="tool-feat">Processes 5M+ rows/day — 15 heterogeneous data sources unified</div>
+          <div class="tool-feat">Smart dedup engine with fuzzy matching — 99.3% accuracy</div>
+          <div class="tool-feat">Data quality scorecard with column-level health metrics</div>
+          <div class="tool-feat">Incremental load mode — 80% faster than full-refresh runs</div>
+        </div>
+        <div class="tool-tags"><span class="tool-tag">Pandas</span><span class="tool-tag">NumPy</span><span class="tool-tag">FuzzyWuzzy</span><span class="tool-tag">SQLAlchemy</span><span class="tool-tag">Airflow</span></div>
+      </div>
+      <div class="tool-footer"><span class="tool-status"><span class="tool-status-dot"></span>Live</span><span class="tool-year">2023</span></div>
+    </div>
+
+    <!-- 13. GIT / GITHUB -->
+    <div class="tool" style="--ti:linear-gradient(135deg,rgba(255,190,11,.2),rgba(251,86,7,.12));--tg:rgba(255,190,11,.07);--tf:#ffbe0b">
+      <div class="tool-top">
+        <div class="tool-top-icon" style="--ti:linear-gradient(135deg,rgba(255,190,11,.3),rgba(251,86,7,.2))">&#128025;</div>
+        <div class="tool-top-text">
+          <div class="tool-name">Git / GitHub</div>
+          <div class="tool-category">Version Control</div>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-proj-title"><span>&#128101;</span> PyMLUtils — Open Source ML Library</div>
+        <div class="tool-proj-desc">I kept rewriting the same preprocessing and eval helpers across projects, so I packaged them into a proper library and put it on GitHub. More people found it than I expected. Now I maintain it properly — issues, PRs, releases, the whole thing.</div>
+        <div class="tool-features">
+          <div class="tool-feat">GitHub Actions CI/CD — auto-test on every PR, PyPI auto-publish</div>
+          <div class="tool-feat">Semantic versioning with changelogs auto-generated from commits</div>
+          <div class="tool-feat">Branching strategy: Gitflow with protected main + staging branches</div>
+          <div class="tool-feat">600+ stars, 80+ forks, 20+ contributors from 15 countries</div>
+        </div>
+        <div class="tool-tags"><span class="tool-tag">Git</span><span class="tool-tag">GitHub Actions</span><span class="tool-tag">PyPI</span><span class="tool-tag">pytest</span><span class="tool-tag">pre-commit</span></div>
+      </div>
+      <div class="tool-footer"><span class="tool-status"><span class="tool-status-dot"></span>Open Source</span><span class="tool-year">2023</span></div>
+    </div>
+
+    <!-- 14. DOCKER -->
+    <div class="tool" style="--ti:linear-gradient(135deg,rgba(58,134,255,.2),rgba(6,214,160,.12));--tg:rgba(58,134,255,.07);--tf:#3a86ff">
+      <div class="tool-top">
+        <div class="tool-top-icon" style="--ti:linear-gradient(135deg,rgba(58,134,255,.3),rgba(6,214,160,.2))">&#128736;</div>
+        <div class="tool-top-text">
+          <div class="tool-name">Docker</div>
+          <div class="tool-category">DevOps</div>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-proj-title"><span>&#128230;</span> ContainerAI — ML Microservices Stack</div>
+        <div class="tool-proj-desc">Needed to deploy a multi-part ML system where each piece could be updated independently without taking everything down. Docker Compose for local dev, Kubernetes in production. First time I deployed a rolling update with zero downtime was a good day.</div>
+        <div class="tool-features">
+          <div class="tool-feat">12-service Docker Compose stack with health checks &amp; restart policies</div>
+          <div class="tool-feat">Kubernetes deployment — rolling updates with zero downtime</div>
+          <div class="tool-feat">GPU-enabled inference containers for deep learning models</div>
+          <div class="tool-feat">Prometheus + Grafana observability stack integrated</div>
+        </div>
+        <div class="tool-tags"><span class="tool-tag">Docker</span><span class="tool-tag">Kubernetes</span><span class="tool-tag">Helm</span><span class="tool-tag">Prometheus</span><span class="tool-tag">NVIDIA Runtime</span></div>
+      </div>
+      <div class="tool-footer"><span class="tool-status"><span class="tool-status-dot"></span>Production</span><span class="tool-year">2024</span></div>
+    </div>
+
+    <!-- 15. SCIKIT-LEARN -->
+    <div class="tool" style="--ti:linear-gradient(135deg,rgba(255,0,110,.2),rgba(255,190,11,.12));--tg:rgba(255,0,110,.07);--tf:#ff006e">
+      <div class="tool-top">
+        <div class="tool-top-icon" style="--ti:linear-gradient(135deg,rgba(255,0,110,.3),rgba(255,190,11,.2))">&#127381;</div>
+        <div class="tool-top-text">
+          <div class="tool-name">Scikit-Learn</div>
+          <div class="tool-category">ML Library</div>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-proj-title"><span>&#128185;</span> ForecastEdge — Sales Prediction Engine</div>
+        <div class="tool-proj-desc">Retail client was ordering stock based on gut feeling. Trained an ensemble model on 3 years of their data. They were skeptical until the first week's predictions came in at 94% accurate. Now they run it before every order cycle.</div>
+        <div class="tool-features">
+          <div class="tool-feat">Stacked ensemble: XGBoost + Random Forest + Ridge — 94% accuracy</div>
+          <div class="tool-feat">Automated feature engineering: lag features, seasonality, promotions</div>
+          <div class="tool-feat">SHAP explainability — which factors drive each store's forecast</div>
+          <div class="tool-feat">Deployed as scheduled job — fresh predictions every Sunday 2 AM</div>
+        </div>
+        <div class="tool-tags"><span class="tool-tag">Scikit-Learn</span><span class="tool-tag">XGBoost</span><span class="tool-tag">SHAP</span><span class="tool-tag">Optuna</span><span class="tool-tag">MLflow</span></div>
+      </div>
+      <div class="tool-footer"><span class="tool-status"><span class="tool-status-dot"></span>Live in Prod</span><span class="tool-year">2023</span></div>
+    </div>
+
+    <!-- 16. JUPYTER -->
+    <div class="tool" style="--ti:linear-gradient(135deg,rgba(251,86,7,.2),rgba(255,190,11,.12));--tg:rgba(251,86,7,.07);--tf:#fb5607">
+      <div class="tool-top">
+        <div class="tool-top-icon" style="--ti:linear-gradient(135deg,rgba(251,86,7,.3),rgba(255,190,11,.2))">&#128270;</div>
+        <div class="tool-top-text">
+          <div class="tool-name">Jupyter</div>
+          <div class="tool-category">Research &amp; Prototyping</div>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-proj-title"><span>&#128211;</span> ResearchLab — Interactive EDA Platform</div>
+        <div class="tool-proj-desc">Healthcare analytics project that needed proper, reproducible analysis — the kind where you can see every step. Did all the EDA and statistical testing in Jupyter with full commentary. The client's team could follow the logic without needing to understand Python.</div>
+        <div class="tool-features">
+          <div class="tool-feat">Custom Jupyter extensions for one-click profiling &amp; quality reports</div>
+          <div class="tool-feat">Parameterized notebooks for automated batch EDA runs</div>
+          <div class="tool-feat">Cohort survival analysis &amp; Kaplan-Meier curves on patient data</div>
+          <div class="tool-feat">Git-integrated notebooks with diff-friendly cell outputs</div>
+        </div>
+        <div class="tool-tags"><span class="tool-tag">Jupyter</span><span class="tool-tag">Pandas Profiling</span><span class="tool-tag">Scipy</span><span class="tool-tag">Plotly</span><span class="tool-tag">nbformat</span></div>
+      </div>
+      <div class="tool-footer"><span class="tool-status wip"><span class="tool-status-dot"></span>Research Phase</span><span class="tool-year">2024</span></div>
+    </div>
+
+    <!-- 17. PYTORCH -->
+    <div class="tool" style="--ti:linear-gradient(135deg,rgba(255,0,110,.2),rgba(131,56,236,.12));--tg:rgba(255,0,110,.07);--tf:#ff006e">
+      <div class="tool-top">
+        <div class="tool-top-icon" style="--ti:linear-gradient(135deg,rgba(255,0,110,.3),rgba(131,56,236,.2))">&#127358;</div>
+        <div class="tool-top-text">
+          <div class="tool-name">PyTorch</div>
+          <div class="tool-category">Deep Learning</div>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-proj-title"><span>&#129504;</span> DeepVision — Neural Image Classifier</div>
+        <div class="tool-proj-desc">Trained a vision model on X-ray scans to help flag potential issues for doctors to review. PyTorch gave me the flexibility to try different architectures. The Grad-CAM heatmaps showing what the model was looking at were what convinced the doctors to actually trust it.</div>
+        <div class="tool-features">
+          <div class="tool-feat">Custom ViT + ResNet50 ensemble achieving 97.2% classification accuracy</div>
+          <div class="tool-feat">Grad-CAM heatmaps showing model's region of interest per scan</div>
+          <div class="tool-feat">Training on 120K labeled X-rays with heavy augmentation pipeline</div>
+          <div class="tool-feat">ONNX export for cross-platform edge deployment</div>
+        </div>
+        <div class="tool-tags"><span class="tool-tag">PyTorch</span><span class="tool-tag">torchvision</span><span class="tool-tag">Grad-CAM</span><span class="tool-tag">ONNX</span><span class="tool-tag">Albumentations</span></div>
+      </div>
+      <div class="tool-footer"><span class="tool-status"><span class="tool-status-dot"></span>Clinical Trial</span><span class="tool-year">2024</span></div>
+    </div>
+
+    <!-- 18. VS CODE -->
+    <div class="tool" style="--ti:linear-gradient(135deg,rgba(58,134,255,.2),rgba(131,56,236,.12));--tg:rgba(58,134,255,.07);--tf:#3a86ff">
+      <div class="tool-top">
+        <div class="tool-top-icon" style="--ti:linear-gradient(135deg,rgba(58,134,255,.3),rgba(131,56,236,.2))">&#128187;</div>
+        <div class="tool-top-text">
+          <div class="tool-name">VS Code</div>
+          <div class="tool-category">Development IDE</div>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-proj-title"><span>&#128736;</span> AICode Studio — Smart Dev Environment</div>
+        <div class="tool-proj-desc">Spent too much time setting up new projects from scratch. Built a devcontainer setup with all my usual extensions, settings, and a task that scaffolds a new ML project in one command. Put it on GitHub — a few other people use it now too.</div>
+        <div class="tool-features">
+          <div class="tool-feat">30+ curated extensions: Pylance, Docker, GitHub CoPilot, GitLens</div>
+          <div class="tool-feat">Custom ML project scaffold generator via VS Code tasks</div>
+          <div class="tool-feat">Remote SSH containers for cloud GPU development workflows</div>
+          <div class="tool-feat">Shared workspace settings published as open-source devcontainer</div>
+        </div>
+        <div class="tool-tags"><span class="tool-tag">VS Code</span><span class="tool-tag">Pylance</span><span class="tool-tag">Dev Containers</span><span class="tool-tag">GitHub Copilot</span><span class="tool-tag">GitLens</span></div>
+      </div>
+      <div class="tool-footer"><span class="tool-status"><span class="tool-status-dot"></span>Daily Use</span><span class="tool-year">Ongoing</span></div>
+    </div>
+
+    <!-- 19. MONGODB -->
+    <div class="tool" style="--ti:linear-gradient(135deg,rgba(6,214,160,.2),rgba(58,134,255,.12));--tg:rgba(6,214,160,.07);--tf:#06d6a0">
+      <div class="tool-top">
+        <div class="tool-top-icon" style="--ti:linear-gradient(135deg,rgba(6,214,160,.3),rgba(58,134,255,.2))">&#128508;</div>
+        <div class="tool-top-text">
+          <div class="tool-name">MongoDB</div>
+          <div class="tool-category">NoSQL Database</div>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-proj-title"><span>&#128218;</span> ContentVerse — Headless CMS Platform</div>
+        <div class="tool-proj-desc">Built a headless CMS for an agency running 8 client sites. MongoDB was the right call — content structures vary wildly between clients and I didn't want to do schema migrations every time someone needed a new field. Runs quietly in the background for all of them.</div>
+        <div class="tool-features">
+          <div class="tool-feat">Schema-less dynamic content types — no migrations needed for new fields</div>
+          <div class="tool-feat">Full-text Atlas Search across 500K+ content documents</div>
+          <div class="tool-feat">GraphQL API with DataLoader-based query batching &amp; caching</div>
+          <div class="tool-feat">Change Streams powering real-time preview for editors</div>
+        </div>
+        <div class="tool-tags"><span class="tool-tag">MongoDB Atlas</span><span class="tool-tag">Mongoose</span><span class="tool-tag">GraphQL</span><span class="tool-tag">Node.js</span><span class="tool-tag">Redis</span></div>
+      </div>
+      <div class="tool-footer"><span class="tool-status"><span class="tool-status-dot"></span>Live — 8 Clients</span><span class="tool-year">2024</span></div>
+    </div>
+
+    <!-- 20. POSTMAN -->
+    <div class="tool" style="--ti:linear-gradient(135deg,rgba(255,190,11,.2),rgba(255,0,110,.12));--tg:rgba(255,190,11,.07);--tf:#ffbe0b">
+      <div class="tool-top">
+        <div class="tool-top-icon" style="--ti:linear-gradient(135deg,rgba(255,190,11,.3),rgba(255,0,110,.2))">&#128640;</div>
+        <div class="tool-top-text">
+          <div class="tool-name">Postman</div>
+          <div class="tool-category">API Testing</div>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-proj-title"><span>&#9989;</span> APIGuard — Automated Test Suite</div>
+        <div class="tool-proj-desc">Fintech project where breaking an API endpoint was a real problem. Built out a full Postman collection covering 400+ endpoints with proper test assertions. Plugged it into GitHub Actions so every deployment gets tested before it touches production.</div>
+        <div class="tool-features">
+          <div class="tool-feat">400+ test cases across auth, CRUD, edge cases &amp; error flows</div>
+          <div class="tool-feat">Newman CLI integration — tests run in GitHub Actions on every PR</div>
+          <div class="tool-feat">Environment-aware collections: dev / staging / production configs</div>
+          <div class="tool-feat">Automated contract testing — catches breaking API changes instantly</div>
+        </div>
+        <div class="tool-tags"><span class="tool-tag">Postman</span><span class="tool-tag">Newman</span><span class="tool-tag">GitHub Actions</span><span class="tool-tag">JavaScript</span><span class="tool-tag">Chai</span></div>
+      </div>
+      <div class="tool-footer"><span class="tool-status"><span class="tool-status-dot"></span>Active</span><span class="tool-year">2024</span></div>
+    </div>
+
+  </div>
+</section>
+
+<div class="neon-divider"></div>
+
+<!-- CONTACT -->
+<section class="section" id="contact" style="background:rgba(255,190,11,.02);position:relative;z-index:1">
+  <div class="section-header fade-up">
+    <div class="section-eyebrow"><i class="fas fa-paper-plane"></i> Get In Touch</div>
+    <h2>Get in <span class="highlight">touch</span></h2>
+    <p>Have something you need built? Just reach out — I'll tell you honestly if I can help</p>
+  </div>
+  <div class="contact-wrap">
+    <div class="fade-left">
+      <div class="contact-left">
+        <h3>Drop me a message</h3>
+        <p>I'm open to freelance work — data science, ML, apps, or AI stuff. If you have a project in mind, just tell me what you're trying to do. I'll give you a straight answer on whether I can help and roughly what it would take.</p>
+        <div class="c-cards">
+          <a href="tel:+919745461686" class="c-card" style="--cc:linear-gradient(135deg,rgba(6,214,160,.2),rgba(58,134,255,.2))">
+            <div class="c-ico" style="background:linear-gradient(135deg,rgba(6,214,160,.2),rgba(58,134,255,.2))"><i class="fas fa-phone" style="color:#06d6a0"></i></div>
+            <div class="c-text"><small>Call Me</small><span>+91 9745461686</span></div>
+          </a>
+          <a href="mailto:Shebinsillikkl@gmail.com" class="c-card" style="--cc:linear-gradient(135deg,rgba(131,56,236,.2),rgba(255,0,110,.2))">
+            <div class="c-ico" style="background:linear-gradient(135deg,rgba(131,56,236,.2),rgba(255,0,110,.2))"><i class="fas fa-envelope" style="color:#a78bfa"></i></div>
+            <div class="c-text"><small>Email Me</small><span>Shebinsillikkl@gmail.com</span></div>
+          </a>
+          <a href="https://wa.me/919745461686?text=Hi%20Shebin%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project." target="_blank" class="c-card" style="--cc:linear-gradient(135deg,rgba(37,211,102,.2),rgba(6,214,160,.2))">
+            <div class="c-ico" style="background:linear-gradient(135deg,rgba(37,211,102,.2),rgba(6,214,160,.2))"><i class="fab fa-whatsapp" style="color:#25d366"></i></div>
+            <div class="c-text"><small>WhatsApp</small><span>+91 9745461686</span></div>
+          </a>
+          <a href="#" class="c-card" style="--cc:linear-gradient(135deg,rgba(58,134,255,.2),rgba(6,214,160,.2))">
+            <div class="c-ico" style="background:linear-gradient(135deg,rgba(58,134,255,.2),rgba(6,214,160,.2))"><i class="fab fa-linkedin" style="color:#3a86ff"></i></div>
+            <div class="c-text"><small>LinkedIn</small><span>Shebin S Illikkal</span></div>
+          </a>
+          <a href="#" class="c-card" style="--cc:linear-gradient(135deg,rgba(255,190,11,.2),rgba(251,86,7,.2))">
+            <div class="c-ico" style="background:linear-gradient(135deg,rgba(255,190,11,.2),rgba(251,86,7,.2))"><i class="fab fa-github" style="color:#ffbe0b"></i></div>
+            <div class="c-text"><small>GitHub</small><span>github.com/shebin</span></div>
+          </a>
+          <a href="#" class="c-card" style="--cc:linear-gradient(135deg,rgba(255,0,110,.2),rgba(131,56,236,.2))">
+            <div class="c-ico" style="background:linear-gradient(135deg,rgba(255,0,110,.2),rgba(131,56,236,.2))"><i class="fas fa-map-marker-alt" style="color:#ff006e"></i></div>
+            <div class="c-text"><small>Location</small><span>Kerala, India</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="fade-right">
+      <div class="c-form">
+        <div id="form-success" style="display:none;text-align:center;padding:40px 20px">
+          <div style="font-size:3rem;margin-bottom:15px">&#10003;</div>
+          <h3 style="color:#06d6a0;font-size:1.4rem;margin-bottom:10px">Message sent!</h3>
+          <p style="color:#94a3b8;font-size:.95rem">Thanks for reaching out. I'll get back to you within 24 hours on <strong style="color:#e2d9f3">Shebinsillikkl@gmail.com</strong></p>
+          <button onclick="document.getElementById('form-success').style.display='none';document.getElementById('contact-form').style.display='block'" style="margin-top:20px;padding:10px 28px;border-radius:50px;border:1px solid rgba(131,56,236,.4);background:rgba(131,56,236,.15);color:#a78bfa;font-size:.88rem;cursor:pointer;font-family:inherit">Send another message</button>
+        </div>
+        <form id="contact-form" novalidate>
+          <div class="f-row">
+            <div class="f-grp"><label>Your Name *</label><input type="text" id="contact-name" name="name" placeholder="Your full name" required/></div>
+            <div class="f-grp"><label>Email Address *</label><input type="email" name="email" placeholder="your@email.com" required/></div>
+          </div>
+          <div class="f-row">
+            <div class="f-grp"><label>Phone / WhatsApp</label><input type="text" name="phone" placeholder="+91 98765 43210"/></div>
+            <div class="f-grp"><label>Service Required</label>
+              <select name="service">
+                <option>Machine Learning / AI</option>
+                <option>Data Analytics &amp; BI</option>
+                <option>FlutterFlow Mobile App</option>
+                <option>Full-Stack Web Dev</option>
+                <option>Claude AI Integration</option>
+                <option>Data Science Consulting</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="f-grp"><label>Budget (in ₹)</label><input type="text" name="budget" placeholder="e.g. ₹10,000 – ₹1,00,000"/></div>
+          <div class="f-grp"><label>Tell me about your project *</label><textarea name="message" placeholder="What do you need built? Any timeline, goals, or specific requirements — the more detail the better." required></textarea></div>
+          <div id="form-error" style="display:none;color:#ff6b6b;font-size:.82rem;margin-bottom:12px;padding:10px 14px;background:rgba(255,107,107,.08);border-radius:10px;border:1px solid rgba(255,107,107,.2)"></div>
+          <button type="submit" class="submit-btn" id="submit-btn">&#128640; Send Message — Let's Connect!</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">Shebin S Illikkal</span>
+      <span class="sub">Freelancer &bull; Data Scientist &bull; Developer</span>
+      <p>Freelancer from Kerala doing data science, ML, app development and AI integration work. If you have a project, just reach out — I'll give you a straight answer.</p>
+      <div class="footer-contact-strip">
+        <a href="tel:+919745461686" class="fc-strip" style="text-decoration:none;color:inherit"><i class="fas fa-phone"></i> +91 9745461686</a>
+        <a href="mailto:Shebinsillikkl@gmail.com" class="fc-strip" style="text-decoration:none;color:inherit"><i class="fas fa-envelope"></i> Shebinsillikkl@gmail.com</a>
+        <a href="https://wa.me/919745461686" target="_blank" class="fc-strip" style="text-decoration:none;color:inherit"><i class="fab fa-whatsapp" style="color:#25d366"></i> WhatsApp me</a>
+        <div class="fc-strip"><i class="fas fa-map-marker-alt"></i> Kerala, India</div>
+      </div>
+      <div class="footer-socials">
+        <a href="mailto:Shebinsillikkl@gmail.com" class="soc" title="Email" style="--sb:linear-gradient(135deg,rgba(131,56,236,.3),rgba(255,0,110,.3))"><i class="fas fa-envelope"></i></a>
+        <a href="https://wa.me/919745461686" target="_blank" class="soc" title="WhatsApp" style="--sb:linear-gradient(135deg,rgba(37,211,102,.3),rgba(6,214,160,.3))"><i class="fab fa-whatsapp"></i></a>
+        <a href="tel:+919745461686" class="soc" title="Call" style="--sb:linear-gradient(135deg,rgba(58,134,255,.3),rgba(6,214,160,.3))"><i class="fas fa-phone"></i></a>
+        <a href="https://linkedin.com/in/shebin-s-illikkal" target="_blank" class="soc" title="LinkedIn" style="--sb:linear-gradient(135deg,rgba(58,134,255,.3),rgba(6,214,160,.3))"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/shebin-s-illikkal" target="_blank" class="soc" title="GitHub" style="--sb:linear-gradient(135deg,rgba(255,190,11,.3),rgba(251,86,7,.3))"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+    <div class="footer-nav">
+      <h5>Navigation</h5>
+      <ul>
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#tools">Tech Stack</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-nav">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="#">Machine Learning & AI</a></li>
+        <li><a href="#">Data Analytics & BI</a></li>
+        <li><a href="#">FlutterFlow Apps</a></li>
+        <li><a href="#">Full-Stack Web Dev</a></li>
+        <li><a href="#">Claude AI Integration</a></li>
+        <li><a href="#">Data Science Consulting</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 <span class="gr">Shebin S Illikkal</span>. All rights reserved.</p>
+    <div class="made-with">Made with <span class="heart" style="color:#ff006e;font-size:1rem">&#10084;&#65039;</span> & Claude AI</div>
+  </div>
+</footer>
+
+<script>
+// CUSTOM CURSOR
+const cursor = document.getElementById('cursor');
+const trail = document.getElementById('cursorTrail');
+let mx=0,my=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cursor.style.left=mx+'px';cursor.style.top=my+'px';
+});
+setInterval(()=>{trail.style.left=mx+'px';trail.style.top=my+'px';},80);
+document.querySelectorAll('a,button,.tool,.srv-card,.proj-card,.nbub,.bub').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.width='20px';cursor.style.height='20px';cursor.style.background='var(--neon2)';trail.style.width='50px';trail.style.height='50px';});
+  el.addEventListener('mouseleave',()=>{cursor.style.width='12px';cursor.style.height='12px';cursor.style.background='var(--neon1)';trail.style.width='35px';trail.style.height='35px';});
+});
+
+// PARTICLES
+const canvas=document.getElementById('bg-canvas');
+const ctx=canvas.getContext('2d');
+function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+resize();window.addEventListener('resize',resize);
+const pts=[];
+for(let i=0;i<120;i++) pts.push({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,r:Math.random()*2+.5,dx:(Math.random()-.5)*.5,dy:(Math.random()-.5)*.5,a:Math.random()*.6+.15,c:['255,0,110','131,56,236','58,134,255','6,214,160','255,190,11','251,86,7','255,0,200','0,200,255'][Math.floor(Math.random()*8)]});
+function drawPts(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  pts.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba('+p.c+','+p.a+')';ctx.fill();p.x+=p.dx;p.y+=p.dy;if(p.x<0||p.x>canvas.width)p.dx*=-1;if(p.y<0||p.y>canvas.height)p.dy*=-1;});
+  for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const d=Math.hypot(pts[i].x-pts[j].x,pts[i].y-pts[j].y);if(d<120){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle='rgba(150,80,255,'+(0.15*(1-d/120))+')';ctx.lineWidth=.6;ctx.stroke();}}
+  requestAnimationFrame(drawPts);
+}
+drawPts();
+
+// TYPING
+const words=['ML Systems','AI Solutions','Data Pipelines','Mobile Apps','Web Applications','Neural Networks','Analytics Platforms','Intelligent Bots'];
+let wi=0,ci=0,del=false;
+const el=document.getElementById('typed');
+function type(){const w=words[wi];if(!del){el.textContent=w.slice(0,++ci);if(ci===w.length){del=true;setTimeout(type,2000);return;}}else{el.textContent=w.slice(0,--ci);if(ci===0){del=false;wi=(wi+1)%words.length;}}setTimeout(type,del?55:100);}
+type();
+
+// COUNT UP
+setTimeout(()=>{
+  document.querySelectorAll('[data-count]').forEach(el=>{
+    const t=+el.getAttribute('data-count');let c=0;
+    const tm=setInterval(()=>{c=Math.min(c+t/60,t);el.textContent=Math.floor(c)+'+';if(c>=t)clearInterval(tm);},25);
+  });
+},800);
+
+// SCROLL ANIMATIONS
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});},{threshold:.1});
+document.querySelectorAll('.fade-up,.fade-left,.fade-right,.fade-scale').forEach(el=>obs.observe(el));
+
+// SKILL BARS
+const skObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.querySelectorAll('.sk-fill').forEach(b=>{setTimeout(()=>{b.style.width=b.getAttribute('data-w')+'%';},200);});});},{threshold:.3});
+document.querySelectorAll('.sk-group').forEach(g=>skObs.observe(g));
+
+// MOUSE GLOW ON CARDS
+document.querySelectorAll('.srv-card,.proj-card,.sk-group,.tool,.about-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=((e.clientX-r.left)/r.width)*100;
+    const y=((e.clientY-r.top)/r.height)*100;
+    card.style.setProperty('--mx',x+'%');
+    card.style.setProperty('--my',y+'%');
+    card.style.boxShadow='0 0 30px rgba(131,56,236,.06)';
+  });
+  card.addEventListener('mouseleave',()=>{card.style.boxShadow='';});
+});
+
+// WAVE ANIMATION
+const wc=document.getElementById('wave-canvas');
+if(wc){
+  const wctx=wc.getContext('2d');
+  wc.width=window.innerWidth;wc.height=120;
+  window.addEventListener('resize',()=>{wc.width=window.innerWidth;});
+  let wt=0;
+  const wColors=[
+    {r:131,g:56,b:236,s:1.2,o:.5,sp:.015},
+    {r:255,g:0,b:110,s:0.8,o:.4,sp:.02},
+    {r:58,g:134,b:255,s:1.5,o:.35,sp:.012},
+    {r:6,g:214,b:160,s:1.0,o:.3,sp:.018}
+  ];
+  function drawWave(){
+    wctx.clearRect(0,0,wc.width,120);
+    wColors.forEach((wv,idx)=>{
+      wctx.beginPath();
+      wctx.moveTo(0,120);
+      for(let x=0;x<=wc.width;x+=5){
+        const y=60+Math.sin((x*0.008*wv.s)+(wt*(wv.sp*10)))*(25+idx*5)+Math.sin((x*0.015+idx)+(wt*0.02))*12;
+        wctx.lineTo(x,y);
+      }
+      wctx.lineTo(wc.width,120);wctx.closePath();
+      const grad=wctx.createLinearGradient(0,0,wc.width,0);
+      grad.addColorStop(0,`rgba(${wv.r},${wv.g},${wv.b},0)`);
+      grad.addColorStop(0.3,`rgba(${wv.r},${wv.g},${wv.b},${wv.o})`);
+      grad.addColorStop(0.7,`rgba(${wv.r},${wv.g},${wv.b},${wv.o})`);
+      grad.addColorStop(1,`rgba(${wv.r},${wv.g},${wv.b},0)`);
+      wctx.fillStyle=grad;wctx.fill();
+    });
+    wt++;requestAnimationFrame(drawWave);
+  }
+  drawWave();
+}
+
+// SMOOTH NAV
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const target=a.getAttribute('href');
+    const t=document.querySelector(target);
+    if(t) t.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+
+// HERO "LET'S TALK" — scroll to contact and focus name field
+const heroTalkBtn=document.getElementById('hero-talk-btn');
+if(heroTalkBtn){
+  heroTalkBtn.addEventListener('click',e=>{
+    e.preventDefault();
+    document.getElementById('contact').scrollIntoView({behavior:'smooth',block:'start'});
+    setTimeout(()=>{ const f=document.getElementById('contact-name'); if(f) f.focus(); },700);
+  });
+}
+
+// CONTACT FORM — send to Shebinsillikkl@gmail.com via FormSubmit.co
+const contactForm=document.getElementById('contact-form');
+if(contactForm){
+  contactForm.addEventListener('submit',async function(e){
+    e.preventDefault();
+    const btn=document.getElementById('submit-btn');
+    const errEl=document.getElementById('form-error');
+    errEl.style.display='none';
+
+    // Basic validation
+    const name=this.name.value.trim();
+    const email=this.email.value.trim();
+    const message=this.message.value.trim();
+    if(!name||!email||!message){
+      errEl.textContent='Please fill in your name, email, and project details.';
+      errEl.style.display='block';
+      return;
+    }
+    const emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if(!emailOk){
+      errEl.textContent='Please enter a valid email address.';
+      errEl.style.display='block';
+      return;
+    }
+
+    btn.textContent='Sending...';
+    btn.disabled=true;
+
+    try{
+      const res=await fetch('https://formsubmit.co/ajax/Shebinsillikkl@gmail.com',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body:JSON.stringify({
+          name: name,
+          email: email,
+          phone: this.phone.value||'Not provided',
+          service: this.service.value,
+          budget: this.budget.value||'Not specified',
+          message: message,
+          _subject: 'New project inquiry from '+name+' — Portfolio Contact'
+        })
+      });
+      const data=await res.json();
+      if(data.success==='true'||data.success===true){
+        contactForm.style.display='none';
+        document.getElementById('form-success').style.display='block';
+        contactForm.reset();
+      } else {
+        throw new Error('Send failed');
+      }
+    }catch(err){
+      // Fallback: open email client with pre-filled details
+      const sub=encodeURIComponent('Project Inquiry from '+name);
+      const body=encodeURIComponent('Name: '+name+'\nEmail: '+email+'\nPhone: '+(this.phone.value||'N/A')+'\nService: '+this.service.value+'\nBudget: '+(this.budget.value||'N/A')+'\n\nProject Details:\n'+message);
+      window.location.href='mailto:Shebinsillikkl@gmail.com?subject='+sub+'&body='+body;
+    }
+
+    btn.textContent='\u{1F680} Send Message — Let\'s Connect!';
+    btn.disabled=false;
+  });
+}
+
+// NAV ACTIVE HIGHLIGHT
+window.addEventListener('scroll',()=>{
+  const pos=window.scrollY+120;
+  document.querySelectorAll('section[id],div[id]').forEach(s=>{
+    if(pos>=s.offsetTop && pos<s.offsetTop+s.offsetHeight){
+      document.querySelectorAll('.nav-links a').forEach(a=>{a.style.background='';a.style.color='';});
+      const link=document.querySelector('.nav-links a[href="#'+s.id+'"]');
+      if(link&&!link.classList.contains('nav-cta')){link.style.color='#fff';link.style.background='rgba(131,56,236,.2)';}
+    }
+  });
+});
+</script>
+</body>
+</html>
